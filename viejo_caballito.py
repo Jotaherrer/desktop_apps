@@ -2,6 +2,7 @@
 App de escritorio - Pedidos
 Comando para convertir en ejecutable: pyinstaller --windowed --onedir --icon=./images.ico viejo_caballito.py
 """
+import ttkthemes as themes
 import tkinter as tk
 from tkinter import messagebox, ttk
 import os, time
@@ -233,13 +234,38 @@ def fun_vuelto():
             else:
                 messagebox.showinfo(title='Error', message='Ingrese montos de vuelto o facturación válidos.')
 
+
+def borrar_datos():
+    texto_carne.delete(0,tk.END)
+    texto_pollo.delete(0,tk.END)
+    texto_jq.delete(0,tk.END)
+    texto_verdura.delete(0,tk.END)
+    texto_cq.delete(0,tk.END)
+    texto_tar_jq.delete(0,tk.END)
+    texto_tar_puerro.delete(0,tk.END)
+    texto_tar_beren.delete(0,tk.END)
+    texto_tar_acelga.delete(0,tk.END)
+    texto_tar_cala.delete(0,tk.END)
+    texto_tar_zapa.delete(0,tk.END)
+    texto_menu.delete(0,tk.END)
+    texto_tortilla.delete(0,tk.END)
+    texto_fruta.delete(0,tk.END)
+    texto_cafe.delete(0,tk.END)
+    texto_alfa.delete(0,tk.END)
+    texto_media.delete(0,tk.END)
+    texto_ensa_fru.delete(0,tk.END)
+    texto_gaseosa.delete(0,tk.END) 
+
+
 ### EXCEL INICIAL
 comprobar_archivo()
 
 ### APP DE ESCRITORIO
-ventana = tk.Tk()
+ventana = themes.ThemedTk()
+ventana.set_theme('winxpblue') # Other 'plastik'
 ventana.config(height=540, width=870)
 ventana.title("Aplicación de ventas - Viejo Caballito Bar")
+ventana.iconbitmap(default='images.ico')
 
 ## CAJAS
 # CAJAS EMPANADAS Y TARTAS
@@ -373,12 +399,14 @@ lab_vuelto.place(x=25, y=440)
 ## BOTONES - MESSAGE BOX
 ingresar = ttk.Button(text='Aceptar', command=confirmar)
 cancelar = ttk.Button(text='Cancelar', command=cancelar)
-ingresar.place(x=600, y=480)
-cancelar.place(x=700, y=480)
+ingresar.place(x=550, y=480)
+cancelar.place(x=625, y=480)
 boton_calcular = ttk.Button(text='Calcular venta', command=suma)
 boton_calcular.place(x=450,y=380)
 boton_vuelto = ttk.Button(text='Calcular vuelto', command=fun_vuelto)
 boton_vuelto.place(x=450, y=410)
+boton_borrar = ttk.Button(text='Borrar datos', command=borrar_datos)
+boton_borrar.place(x=700, y=480)
 
 ventana.mainloop()
 
