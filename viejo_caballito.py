@@ -12,6 +12,21 @@ empanadas_de_carne = []
 empanadas_de_pollo = []
 empanadas_de_jq = []
 empanadas_de_verduda = []
+empanadas_de_cq = []
+lista_tarta_jq = []
+lista_tarta_puerro = []
+lista_tarta_beren = []
+lista_tarta_acelga = []
+lista_tarta_cala = []
+lista_tarta_zapa = []
+lista_menu = []
+lista_tortilla = []
+list_fruta =[]
+lista_cafe = []
+lista_alfajor = []
+lista_medialuna = []
+lista_ensa_fruta = []
+lista_gaseosa = []
 
 
 def comprobar_archivo():
@@ -56,6 +71,14 @@ def confirmar():
         texto_tar_acelga.delete(0,tk.END)
         texto_tar_cala.delete(0,tk.END)
         texto_tar_zapa.delete(0,tk.END)
+        texto_menu.delete(0,tk.END)
+        texto_tortilla.delete(0,tk.END)
+        texto_fruta.delete(0,tk.END)
+        texto_cafe.delete(0,tk.END)
+        texto_alfa.delete(0,tk.END)
+        texto_media.delete(0,tk.END)
+        texto_ensa_fru.delete(0,tk.END)
+        texto_gaseosa.delete(0,tk.END)
 
         facturacion.delete(0,tk.END)
         paga_con.delete(0,tk.END)
@@ -78,6 +101,14 @@ def cancelar():
         texto_tar_acelga.delete(0,tk.END)
         texto_tar_cala.delete(0,tk.END)
         texto_tar_zapa.delete(0,tk.END)
+        texto_menu.delete(0,tk.END)
+        texto_tortilla.delete(0,tk.END)
+        texto_fruta.delete(0,tk.END)
+        texto_cafe.delete(0,tk.END)
+        texto_alfa.delete(0,tk.END)
+        texto_media.delete(0,tk.END)
+        texto_ensa_fru.delete(0,tk.END)
+        texto_gaseosa.delete(0,tk.END)
 
         facturacion.delete(0,tk.END)
         paga_con.delete(0,tk.END)
@@ -86,81 +117,98 @@ def cancelar():
         pass
 
 
+def contenido(texto):
+    try:
+        gusto = int(texto.get())
+    except:
+        if texto.get() == '':
+            gusto = int(0)
+        else:
+            messagebox.showinfo(title='Error', message='Ingrese un número válido.')
+    return gusto
+
+
 def suma():
     hora = time.asctime()        
     if facturacion.get() == '':
-        precio_empanada = float(60)
-        try:
-            carne = int(texto_carne.get())
-        except:
-            if texto_carne.get() == '':
-                carne = int(0)
-            else: 
-                messagebox.showinfo(title='Error', message='Ingrese un numero valido.')
-        try:
-            pollo = int(texto_pollo.get())
-        except:
-            if texto_pollo.get() == '':
-                pollo = int(0)
-            else: 
-                messagebox.showinfo(title='Error', message='Ingrese un numero valido.')
-        try:
-            jq = int(texto_jq.get())
-        except:
-            if texto_jq.get() == '':
-                jq = int(0)
-            else: 
-                messagebox.showinfo(title='Error', message='Ingrese un numero valido.')
-        try:
-            ver = int(texto_verdura.get())
-        except:
-            if texto_verdura.get() == '':
-                ver = int(0)
-            else: 
-                messagebox.showinfo(title='Error', message='Ingrese un numero valido.')
-        
-        total_empa = (carne+pollo+jq+ver) * precio_empanada
-        facturacion.insert("0", total_empa)
+        precio_empanada,precio_tarta,precio_menu,precio_tortilla,precio_fruta,precio_cafe,precio_alfa,precio_media,precio_ensa_fruta,precio_gaseosa = 60, 100, 250, 120,50,70,50,25,100,100
+
+        carne = contenido(texto_carne)
+        pollo = contenido(texto_pollo)
+        jq = contenido(texto_jq)
+        ver = contenido(texto_verdura)
+        cq = contenido(texto_cq)
+        tarta_jq = contenido(texto_tar_jq)
+        tarta_puerro = contenido(texto_tar_puerro)
+        tarta_beren = contenido(texto_tar_beren)
+        tarta_acelga = contenido(texto_tar_acelga)
+        tarta_cala = contenido(texto_tar_cala)
+        tarta_zapa = contenido(texto_tar_zapa)
+        menu = contenido(texto_menu)
+        tortilla = contenido(texto_tortilla)
+        fruta = contenido(texto_fruta)
+        cafe = contenido(texto_cafe)
+        alfa = contenido(texto_alfa)
+        medialuna = contenido(texto_media)
+        ensa_fruta = contenido(texto_ensa_fru)
+        gaseosa = contenido(texto_gaseosa)
+
+        total_empa = (carne+pollo+jq+ver+cq) * precio_empanada
+        total_tarta = (tarta_jq +tarta_puerro+tarta_beren+tarta_acelga+tarta_cala+tarta_zapa) * precio_tarta
+        total_otros = (menu*precio_menu+tortilla*precio_tortilla+fruta*precio_fruta+cafe*precio_cafe+alfa*precio_alfa+medialuna*precio_media+ensa_fruta*precio_ensa_fruta+gaseosa*precio_gaseosa) 
+        total_productos = total_empa + total_tarta + total_otros
+        facturacion.insert("0", total_productos)
     else:
         facturacion.delete(0,tk.END)
-        precio_empanada = float(60)
-        try:
-            carne = int(texto_carne.get())
-        except:
-            if texto_carne.get() == '':
-                carne = int(0)
-            else: 
-                messagebox.showinfo(title='Error', message='Ingrese un numero valido.')
-        try:
-            pollo = int(texto_pollo.get())
-        except:
-            if texto_pollo.get() == '':
-                pollo = int(0)
-            else: 
-                messagebox.showinfo(title='Error', message='Ingrese un numero valido.')
-        try:
-            jq = int(texto_jq.get())
-        except:
-            if texto_jq.get() == '':
-                jq = int(0)
-            else: 
-                messagebox.showinfo(title='Error', message='Ingrese un numero valido.')
-        try:
-            ver = int(texto_verdura.get())
-        except:
-            if texto_verdura.get() == '':
-                ver = int(0)
-            else: 
-                messagebox.showinfo(title='Error', message='Ingrese un numero valido.')
+        precio_empanada,precio_tarta,precio_menu,precio_tortilla,precio_fruta,precio_cafe,precio_alfa,precio_media,precio_ensa_fruta,precio_gaseosa = 60, 100, 250, 120,50,70,50,25,100,100
         
-        total_empa = (carne+pollo+jq+ver) * precio_empanada
-        facturacion.insert("0", total_empa)
+        carne = contenido(texto_carne)
+        pollo = contenido(texto_pollo)
+        jq = contenido(texto_jq)
+        ver = contenido(texto_verdura)
+        cq = contenido(texto_cq)
+        tarta_jq = contenido(texto_tar_jq)
+        tarta_puerro = contenido(texto_tar_puerro)
+        tarta_beren = contenido(texto_tar_beren)
+        tarta_acelga = contenido(texto_tar_acelga)
+        tarta_cala = contenido(texto_tar_cala)
+        tarta_zapa = contenido(texto_tar_zapa)
+        menu = contenido(texto_menu)
+        tortilla = contenido(texto_tortilla)
+        fruta = contenido(texto_fruta)
+        cafe = contenido(texto_cafe)
+        alfa = contenido(texto_alfa)
+        medialuna = contenido(texto_media)
+        ensa_fruta = contenido(texto_ensa_fru)
+        gaseosa = contenido(texto_gaseosa)
+
+        total_empa = (carne+pollo+jq+ver+cq) * precio_empanada
+        total_tarta = (tarta_jq +tarta_puerro+tarta_beren+tarta_acelga+tarta_cala+tarta_zapa) * precio_tarta
+        total_otros = (menu*precio_menu+tortilla*precio_tortilla+fruta*precio_fruta+cafe*precio_cafe+alfa*precio_alfa+medialuna*precio_media+ensa_fruta*precio_ensa_fruta+gaseosa*precio_gaseosa) 
+        total_productos = total_empa + total_tarta + total_otros
+        facturacion.insert("0", total_productos)
 
     empanadas_de_carne.append(carne)
     empanadas_de_jq.append(jq)
     empanadas_de_pollo.append(pollo)
     empanadas_de_verduda.append(ver)
-    al_excel = [hora, carne, jq, pollo, ver, total_empa]
+    empanadas_de_cq.append(cq)
+    lista_tarta_jq.append(tarta_jq)
+    lista_tarta_puerro.append(tarta_puerro)
+    lista_tarta_beren.append(tarta_beren)
+    lista_tarta_acelga.append(tarta_acelga)
+    lista_tarta_cala.append(tarta_cala)
+    lista_tarta_zapa.append(tarta_zapa)
+    lista_menu.append(menu)
+    lista_tortilla.append(tortilla)
+    list_fruta.append(fruta)
+    lista_cafe.append(cafe)
+    lista_alfajor.append(alfa)
+    lista_medialuna.append(medialuna)
+    lista_ensa_fruta.append(ensa_fruta)
+    lista_gaseosa.append(gaseosa)
+
+    al_excel = [hora, carne, jq, pollo, ver, cq, tarta_jq, tarta_puerro, tarta_beren, tarta_acelga, tarta_cala, tarta_zapa,menu, tortilla,fruta,cafe,alfa,medialuna,ensa_fruta,gaseosa,total_productos]
     guardar_datos(al_excel)
     lista_productos()
 
