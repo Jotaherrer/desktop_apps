@@ -39,7 +39,7 @@ def comprobar_archivo():
     else:
         wb = Workbook()
         ws = wb.active
-        titulo = ('Hora transacción',"Emp. Carne", 'Emp. Pollo', 'Emp. JQ', 'Emp. Verdura', 'Emp. CQ', 'Tar. JQ', 'Tar. Puerro', 'Tar. Beren.', 'Tar. Acelga', 'Tar. Calab.', 'Tar. Zapa.','Platos','Tortilla','Fruta','Cafe','Alfajores','Medialunas','Ensa. Fruta','Gaseosa','Total')
+        titulo = ('Hora transacción',"Emp. Carne", 'Emp. Pollo', 'Emp. JQ', 'Emp. Verdura', 'Emp. CQ', 'Tar. JQ', 'Tar. Puerro', 'Tar. Beren.', 'Tar. Acelga', 'Tar. Calab.', 'Tar. Zapa.','Platos','Tortilla','Fruta','Cafe','Alfajores','Medialunas','Ensa. Fruta','Gaseosa','Tarjeta D.','Total')
         ws.append(titulo)
         wb.save(filename='Ventas.xlsx')
         print('Creación exitosa del archivo')
@@ -57,6 +57,17 @@ def lista_productos():
     c = len(empanadas_de_carne)
     pedido.insert('0',c)
     
+
+def cambiar_tarjeta_valor():
+    if tarjeta_valor.get() == int(1):
+        tarjeta_valor.set(0)
+        print('Borrado boton tarjeta_valor')
+    else:
+        print('Boton no tildado..')
+        print(tarjeta_valor.get())
+        print(type(tarjeta_valor.get()))
+        pass
+
 
 def confirmar():
     m = messagebox.askokcancel(title='Confirmación', message='Desea confirmar el pedido?')
@@ -80,6 +91,7 @@ def confirmar():
         texto_media.delete(0,tk.END)
         texto_ensa_fru.delete(0,tk.END)
         texto_gaseosa.delete(0,tk.END)
+        cambiar_tarjeta_valor()
 
         facturacion.delete(0,tk.END)
         paga_con.delete(0,tk.END)
@@ -110,6 +122,7 @@ def cancelar():
         texto_media.delete(0,tk.END)
         texto_ensa_fru.delete(0,tk.END)
         texto_gaseosa.delete(0,tk.END)
+        cambiar_tarjeta_valor()
 
         facturacion.delete(0,tk.END)
         paga_con.delete(0,tk.END)
@@ -189,6 +202,7 @@ def suma():
         total_productos = total_empa + total_tarta + total_otros
         facturacion.insert("0", total_productos)
 
+    pago_tarjeta = checkbox_clicked()
     empanadas_de_carne.append(carne)
     empanadas_de_jq.append(jq)
     empanadas_de_pollo.append(pollo)
@@ -209,7 +223,7 @@ def suma():
     lista_ensa_fruta.append(ensa_fruta)
     lista_gaseosa.append(gaseosa)
 
-    al_excel = [hora, carne, jq, pollo, ver, cq, tarta_jq, tarta_puerro, tarta_beren, tarta_acelga, tarta_cala, tarta_zapa,menu, tortilla,fruta,cafe,alfa,medialuna,ensa_fruta,gaseosa,total_productos]
+    al_excel = [hora, carne, jq, pollo, ver, cq, tarta_jq, tarta_puerro, tarta_beren, tarta_acelga, tarta_cala, tarta_zapa,menu, tortilla,fruta,cafe,alfa,medialuna,ensa_fruta,gaseosa,pago_tarjeta,total_productos]
     guardar_datos(al_excel)
     lista_productos()
 
@@ -255,6 +269,16 @@ def borrar_datos():
     texto_media.delete(0,tk.END)
     texto_ensa_fru.delete(0,tk.END)
     texto_gaseosa.delete(0,tk.END) 
+    cambiar_tarjeta_valor()
+
+    facturacion.delete(0,tk.END)
+    paga_con.delete(0,tk.END)
+    vuelto.delete(0,tk.END)
+
+
+def checkbox_clicked():
+    rta = tarjeta_valor.get()
+    return rta
 
 
 ### EXCEL INICIAL
@@ -265,7 +289,11 @@ ventana = themes.ThemedTk()
 ventana.set_theme('winxpblue') # Other 'plastik'
 ventana.config(height=540, width=870)
 ventana.title("Aplicación de ventas - Viejo Caballito Bar")
-ventana.iconbitmap(default='images.ico')
+#ventana.iconbitmap(default='./images.ico')
+### CHECKBOX
+tarjeta_valor = tk.IntVar()
+tarjeta = ttk.Checkbutton(text='Pago con tarjeta?', variable=tarjeta_valor, command=checkbox_clicked)
+tarjeta.place(x=450, y=355)
 
 ## CAJAS
 # CAJAS EMPANADAS Y TARTAS
