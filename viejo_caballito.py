@@ -9,6 +9,7 @@ import os, time
 import xlwings as xw
 from openpyxl import Workbook, load_workbook
 
+lista_venta = []
 empanadas_de_carne = []
 empanadas_de_pollo = []
 empanadas_de_jq = []
@@ -43,7 +44,7 @@ def comprobar_archivo():
     else:
         wb = Workbook()
         ws = wb.active
-        titulo = ('Hora transacción',"Emp. Carne", 'Emp. Pollo', 'Emp. JQ', 'Emp. Verdura', 'Emp. CQ', 'Tar. JQ', 'Tar. Puerro', 'Tar. Beren.', 'Tar. Acelga', 'Tar. Calab.', 'Tar. Zapa.','Plato S/ Guarn.','Platos','Tortilla','Ensalada','Cafe','Alfajores','Medialunas','Ensa. Fruta','Gaseosa chica','Gaseosa grande','Porción papas','Porción puré','Cerveza','Tarjeta D.','Total')
+        titulo = ('Hora transacción',"Emp. Carne", 'Emp. Pollo', 'Emp. JQ', 'Emp. Verdura', 'Emp. CQ', 'Tar. JQ', 'Tar. Puerro', 'Tar. Beren.', 'Tar. Acelga', 'Tar. Calab.', 'Tar. Zapa.','Plato S/ Guarn.','Platos','Tortilla','Ensalada','Cafe','Alfajores','Medialunas','Ensa. Fruta','Gaseosa chica','Gaseosa grande','Porción papas','Porción puré','Cerveza','Descuentos','Tarjeta D.','Total')
         ws.append(titulo)
         wb.save(filename='Ventas.xlsx')
         print('Creación exitosa del archivo')
@@ -105,6 +106,7 @@ def confirmar():
         facturacion.delete(0,tk.END)
         paga_con.delete(0,tk.END)
         vuelto.delete(0,tk.END)
+        descuento.delete(0,tk.END)
     else:
         pass
 
@@ -136,22 +138,22 @@ def cancelar():
         texto_papas.delete(0,tk.END)
         texto_pure.delete(0,tk.END)
         texto_cerveza.delete(0,tk.END)
-
         cambiar_tarjeta_valor()
 
         facturacion.delete(0,tk.END)
         paga_con.delete(0,tk.END)
         vuelto.delete(0,tk.END)
+        descuento.delete(0,tk.END)
     else:
         pass
 
 
 def contenido(texto):
     try:
-        gusto = int(texto.get())
+        gusto = float(texto.get())
     except:
         if texto.get() == '':
-            gusto = int(0)
+            gusto = float(0)
         else:
             messagebox.showinfo(title='Error', message='Ingrese un número válido.')
     return gusto
@@ -187,11 +189,6 @@ def suma():
         pure = contenido(texto_pure)
         cerveza = contenido(texto_cerveza)
 
-        total_empa = (carne+pollo+jq+ver+cq) * precio_empanada
-        total_tarta = (tarta_jq +tarta_puerro+tarta_beren+tarta_acelga+tarta_cala+tarta_zapa) * precio_tarta
-        total_otros = (menu_sin*precio_menu_sin+menu*precio_menu+tortilla*precio_tortilla+fruta*precio_fruta+cafe*precio_cafe+alfa*precio_alfa+medialuna*precio_media+ensa_fruta*precio_ensa_fruta+gaseosa*precio_gaseosa+precio_gaseosa_grande*gaseosa_grande+papas*precio_papas+precio_pure*pure+cerveza*precio_cerveza) 
-        total_productos = total_empa + total_tarta + total_otros
-        facturacion.insert("0", total_productos)
     else:
         facturacion.delete(0,tk.END)
         precio_empanada,precio_tarta,precio_menu_sin,precio_menu,precio_tortilla,precio_fruta,precio_cafe,precio_alfa,precio_media,precio_ensa_fruta,precio_gaseosa,precio_gaseosa_grande,precio_papas,precio_pure,precio_cerveza = 60, 100, 150,250, 120,50,70,50,25,100,100,200,125,125,150
@@ -221,13 +218,15 @@ def suma():
         pure = contenido(texto_pure)
         cerveza = contenido(texto_cerveza)
 
-        total_empa = (carne+pollo+jq+ver+cq) * precio_empanada
-        total_tarta = (tarta_jq +tarta_puerro+tarta_beren+tarta_acelga+tarta_cala+tarta_zapa) * precio_tarta
-        total_otros = (menu_sin*precio_menu_sin+menu*precio_menu+tortilla*precio_tortilla+fruta*precio_fruta+cafe*precio_cafe+alfa*precio_alfa+medialuna*precio_media+ensa_fruta*precio_ensa_fruta+gaseosa*precio_gaseosa+precio_gaseosa_grande*gaseosa_grande+papas*precio_papas+precio_pure*pure+cerveza*precio_cerveza) 
-        total_productos = total_empa + total_tarta + total_otros
-        facturacion.insert("0", total_productos)
+    descuento_clientes = contenido(descuento)
+    total_empa = (carne+pollo+jq+ver+cq) * precio_empanada
+    total_tarta = (tarta_jq +tarta_puerro+tarta_beren+tarta_acelga+tarta_cala+tarta_zapa) * precio_tarta
+    total_otros = (menu_sin*precio_menu_sin+menu*precio_menu+tortilla*precio_tortilla+fruta*precio_fruta+cafe*precio_cafe+alfa*precio_alfa+medialuna*precio_media+ensa_fruta*precio_ensa_fruta+gaseosa*precio_gaseosa+precio_gaseosa_grande*gaseosa_grande+papas*precio_papas+precio_pure*pure+cerveza*precio_cerveza) 
+    total_productos = total_empa + total_tarta + total_otros - descuento_clientes
+    facturacion.insert("0", total_productos)
 
     pago_tarjeta = checkbox_clicked()
+    lista_venta.append(total_productos)
     empanadas_de_carne.append(carne)
     empanadas_de_jq.append(jq)
     empanadas_de_pollo.append(pollo)
@@ -253,9 +252,20 @@ def suma():
     lista_pure.append(pure)
     lista_cerveza.append(cerveza)
 
-    al_excel = [hora, carne, jq, pollo, ver, cq, tarta_jq, tarta_puerro, tarta_beren, tarta_acelga, tarta_cala, tarta_zapa,menu_sin,menu, tortilla,fruta,cafe,alfa,medialuna,ensa_fruta,gaseosa,gaseosa_grande,papas,pure,cerveza,pago_tarjeta,total_productos]
+    al_excel = [hora, carne, jq, pollo, ver, cq, tarta_jq, tarta_puerro, tarta_beren, tarta_acelga, tarta_cala, tarta_zapa,menu_sin,menu, tortilla,fruta,cafe,alfa,medialuna,ensa_fruta,gaseosa,gaseosa_grande,papas,pure,cerveza,descuento_clientes, pago_tarjeta,total_productos]
     guardar_datos(al_excel)
     lista_productos()
+    total_dia.delete(0,tk.END)
+
+def venta_acumulada():
+    venta = sum(lista_venta)
+    total_dia.insert('0',venta)
+
+
+def funcion_conjunta():
+    confirmar()
+    venta_acumulada()
+
 
 def fun_vuelto():    
     if vuelto.get() == '':
@@ -309,6 +319,7 @@ def borrar_datos():
     facturacion.delete(0,tk.END)
     paga_con.delete(0,tk.END)
     vuelto.delete(0,tk.END)
+    descuento.delete(0,tk.END)
 
 
 def checkbox_clicked():
@@ -419,6 +430,12 @@ paga_con.insert(tk.END, '')
 vuelto = ttk.Entry()
 vuelto.place(x=300, y=500)
 vuelto.insert(tk.END, '')
+descuento = ttk.Entry()
+descuento.place(x=300, y=415)
+descuento.insert(tk.END,'')
+total_dia = ttk.Entry()
+total_dia.place(x=625, y=10,width=90)
+total_dia.insert(tk.END,'')
 
 ## ETIQUETAS
 # ETIQUETAS EMPANADAS Y TARTAS
@@ -481,10 +498,14 @@ lab_paga = ttk.Label(text='Cliente paga con: ')
 lab_paga.place(x=25, y=470)
 lab_vuelto = ttk.Label(text='Vuelto a dar: ')
 lab_vuelto.place(x=25, y=500)
+lab_desc = ttk.Label(text='Descuento a clientes: ')
+lab_desc.place(x=25, y=415)
+lab_total = ttk.Label(text='VENTA ACUMULADA: ')
+lab_total.place(x=500, y=10)
 
 
 ## BOTONES - MESSAGE BOX
-ingresar = ttk.Button(text='Aceptar', command=confirmar)
+ingresar = ttk.Button(text='Aceptar', command=funcion_conjunta)
 cancelar = ttk.Button(text='Cancelar', command=cancelar)
 ingresar.place(x=550, y=480)
 cancelar.place(x=625, y=480)
