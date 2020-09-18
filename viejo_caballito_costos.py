@@ -14,22 +14,44 @@ def comprobar_archivo():
     existe = os.path.exists('Costos.xlsx')
     if existe:
         wb = load_workbook(filename='Costos.xlsx')
-        ws = wb.active
+        ws_costos = wb['Dato Costos']
+        ws_obs = wb['Observaciones']
         print('Apertura exitosa del archivo.')
     else:
         wb = Workbook()
-        ws = wb.active
-        titulo = ('Hora transacción','Queso','Leche','Pollo','Carne P.','Tapa','Cebolla','Pan','Tomate','Lechuga','Yogur','Agua','Nalga','Empleados','Acelga','Huevos','Servilletas','Yerba','Cafe','Jamón','Puerro','Berenjenas','Papa','Calabaza','Alquiler','Luz','AYSA','Telefono','ABL','Diario','Fumig.','Deterg.','Monotr.','Total')
-        ws.append(titulo)
+        ws_costos = wb.create_sheet('Dato Costos',0)
+        ws_obs = wb.create_sheet('Observaciones',1)
+        titulo_costos = ('Hora transacción','Queso','Leche','Pollo','Carne P.','Tapa','Cebolla','Pan','Tomate','Lechuga','Yogur','Agua','Nalga','Empleados','Acelga','Huevos','Servilletas','Yerba','Cafe','Jamón','Puerro','Berenjenas','Papa','Calabaza','Alquiler','Luz','AYSA','Telefono','ABL','Diario','Fumig.','Deterg.','Monotr.','Otros','Otros','Otros','Tarjeta?','Total')
+        ws_costos.append(titulo_costos)
+        titulos_obs = ('Hora transacción', 'Alquiler','Luz','AYSA','Telefono','ABL','Diario','Fumig.','Deterg.','Monotr.','Otros','Otros','Otros','Tarjeta?')
+        ws_obs.append(titulos_obs)
         wb.save(filename='Costos.xlsx')
         print('Creación exitosa del archivo')
 
 
-def guardar_datos(pedido):
+def guardar_datos_costos(pedido):
     wb = load_workbook(filename='Costos.xlsx')
-    wb.active.append(pedido)
+    wb['Dato Costos'].append(pedido)
     wb.save('Costos.xlsx')    
     print("Carga exitosa del costo!!")
+
+
+def guardar_datos_obs(info):
+    wb = load_workbook(filename='Costos.xlsx')
+    wb['Observaciones'].append(info)
+    wb.save('Costos.xlsx')    
+    print("Carga exitosa de las observaciones!!")
+  
+
+def cambiar_tarjeta_valor():
+    if tarjeta_valor.get() == int(1):
+        tarjeta_valor.set(0)
+        print('Borrado boton tarjeta_valor')
+    else:
+        print('Boton no tildado..')
+        print(tarjeta_valor.get())
+        print(type(tarjeta_valor.get()))
+        pass
 
 
 def contenido(caja_precio, caja_cantidad, total):
@@ -47,12 +69,14 @@ def contenido(caja_precio, caja_cantidad, total):
 def contenido_fijos(caja_precio, caja_obs):
     try:
         variable = int(caja_precio.get())
+        observacion = caja_obs.get()
     except:    
         if caja_precio.get() == '':
             variable = 0
+            observacion = ''
         else:
             messagebox.showinfo(title='Error', message='Ingresar un número válido')
-    return variable
+    return variable, observacion
 
 
 def mult():
@@ -85,15 +109,19 @@ def mult():
         cala = contenido(caja_p_calabaza, caja_q_calabaza, caja_t_calabaza)
 
         # COSTOS FIJOS
-        alquiler = contenido_fijos(caja_p_alquiler,caja_obs_alquiler)
-        luz = contenido_fijos(caja_p_luz, caja_obs_luz)
-        agua_servicio = contenido_fijos(caja_p_agua_servicio, caja_obs_agua)
-        telefono = contenido_fijos(caja_p_telefono, caja_obs_telefono)
-        abl = contenido_fijos(caja_p_abl, caja_obs_abl)
-        diario = contenido_fijos(caja_p_diario, caja_obs_diario)
-        fumigador = contenido_fijos(caja_p_fumigador, caja_obs_fumigador)
-        detergente = contenido_fijos(caja_p_detergente, caja_obs_fumigador)
-        monotributo = contenido_fijos(caja_p_monotributo, caja_obs_monotributo)
+        alquiler = contenido_fijos(caja_p_alquiler,caja_obs_alquiler)[0]
+        luz = contenido_fijos(caja_p_luz, caja_obs_luz)[0]
+        agua_servicio = contenido_fijos(caja_p_agua_servicio, caja_obs_agua)[0]
+        telefono = contenido_fijos(caja_p_telefono, caja_obs_telefono)[0]
+        abl = contenido_fijos(caja_p_abl, caja_obs_abl)[0]
+        diario = contenido_fijos(caja_p_diario, caja_obs_diario)[0]
+        fumigador = contenido_fijos(caja_p_fumigador, caja_obs_fumigador)[0]
+        detergente = contenido_fijos(caja_p_detergente, caja_obs_fumigador)[0]
+        monotributo = contenido_fijos(caja_p_monotributo, caja_obs_monotributo)[0]
+        otros1 = contenido_fijos(caja_p_otros1, caja_obs_otros1)[0]
+        otros2 = contenido_fijos(caja_p_otros2, caja_obs_otros2)[0]
+        otros3 = contenido_fijos(caja_p_otros3, caja_obs_otros3)[0]
+
     else:
         # BORRA CASILLEROS COMPLETOS
         caja_total.delete(0,tk.END)
@@ -120,6 +148,8 @@ def mult():
         caja_t_beren.delete(0,tk.END)
         caja_t_papa.delete(0,tk.END)
         caja_t_calabaza.delete(0,tk.END)
+
+        cambiar_tarjeta_valor()
 
         # COMPLETA NUEVAMENTE VALORES
         # COSTOS VARIABLES
@@ -148,31 +178,37 @@ def mult():
         cala = contenido(caja_p_calabaza, caja_q_calabaza, caja_t_calabaza)
 
         # COSTOS FIJOS
-        alquiler = contenido_fijos(caja_p_alquiler,caja_obs_alquiler)
-        luz = contenido_fijos(caja_p_luz, caja_obs_luz)
-        agua_servicio = contenido_fijos(caja_p_agua_servicio, caja_obs_agua)
-        telefono = contenido_fijos(caja_p_telefono, caja_obs_telefono)
-        abl = contenido_fijos(caja_p_abl, caja_obs_abl)
-        diario = contenido_fijos(caja_p_diario, caja_obs_diario)
-        fumigador = contenido_fijos(caja_p_fumigador, caja_obs_fumigador)
-        detergente = contenido_fijos(caja_p_detergente, caja_obs_fumigador)
-        monotributo = contenido_fijos(caja_p_monotributo, caja_obs_monotributo)
+        alquiler = contenido_fijos(caja_p_alquiler,caja_obs_alquiler)[0]
+        luz = contenido_fijos(caja_p_luz, caja_obs_luz)[0]
+        agua_servicio = contenido_fijos(caja_p_agua_servicio, caja_obs_agua)[0]
+        telefono = contenido_fijos(caja_p_telefono, caja_obs_telefono)[0]
+        abl = contenido_fijos(caja_p_abl, caja_obs_abl)[0]
+        diario = contenido_fijos(caja_p_diario, caja_obs_diario)[0]
+        fumigador = contenido_fijos(caja_p_fumigador, caja_obs_fumigador)[0]
+        detergente = contenido_fijos(caja_p_detergente, caja_obs_fumigador)[0]
+        monotributo = contenido_fijos(caja_p_monotributo, caja_obs_monotributo)[0]
+        otros1 = contenido_fijos(caja_p_otros1, caja_obs_otros1)[0]
+        otros2 = contenido_fijos(caja_p_otros2, caja_obs_otros2)[0]
+        otros3 = contenido_fijos(caja_p_otros3, caja_obs_otros3)[0]
 
+    pago_tarjeta = checkbox_clicked()
     costos_varios = queso + leche + pollo + carne_p + tapa + cebolla + pan + tomate + lechuga+yogur+agua+nalga+empleados + acelga + huevos + servilletas + yerba + cafe + jamon + puerro + beren + papa + cala
-    costos_fijos = alquiler + luz + agua_servicio + telefono + abl + diario + fumigador + detergente + monotributo
+    costos_fijos = alquiler + luz + agua_servicio + telefono + abl + diario + fumigador + detergente + monotributo + otros1 + otros2 + otros3
     facturacion = costos_varios + costos_fijos
     caja_total.insert('0',facturacion)
 
     # PASAJE A EXCEL
-    al_excel = [hora, queso,leche,pollo,carne_p,tapa,cebolla,pan,tomate,lechuga,yogur, agua,nalga,empleados,acelga,huevos,servilletas,yerba,cafe,jamon,puerro,beren,papa,cala,alquiler,luz,agua,telefono,abl,diario,fumigador,detergente,monotributo,facturacion]
-    guardar_datos(al_excel)
+    al_excel = [hora, queso,leche,pollo,carne_p,tapa,cebolla,pan,tomate,lechuga,yogur, agua,nalga,empleados,acelga,huevos,servilletas,yerba,cafe,jamon,puerro,beren,papa,cala,alquiler,luz,agua,telefono,abl,diario,fumigador,detergente,monotributo,otros1, otros2, otros3,pago_tarjeta,facturacion]
+    al_excel_obs = [hora, contenido_fijos(caja_p_alquiler,caja_obs_alquiler)[1], contenido_fijos(caja_p_luz, caja_obs_luz)[1], contenido_fijos(caja_p_agua_servicio, caja_obs_agua)[1], contenido_fijos(caja_p_telefono, caja_obs_telefono)[1], contenido_fijos(caja_p_abl, caja_obs_abl)[1], contenido_fijos(caja_p_diario, caja_obs_diario)[1], contenido_fijos(caja_p_fumigador, caja_obs_fumigador)[1], contenido_fijos(caja_p_detergente, caja_obs_fumigador)[1], contenido_fijos(caja_p_monotributo, caja_obs_monotributo)[1],contenido_fijos(caja_p_otros1, caja_obs_otros1)[1], contenido_fijos(caja_p_otros2, caja_obs_otros2)[1],contenido_fijos(caja_p_otros3, caja_obs_otros3)[1],costos_fijos]
+    guardar_datos_costos(al_excel)
+    guardar_datos_obs(al_excel_obs)
 
 
 def confirmar():
     if caja_total == '':
         messagebox.showinfo(title='Error', message='Ingresar datos numéricos en el registro.')
     else:
-        # COSTOS VARIABLES
+        # COSTOS VARIABLESW
         caja_p_queso.delete(0,tk.END)
         caja_q_queso.delete(0,tk.END)
         caja_t_queso.delete(0,tk.END)
@@ -261,8 +297,15 @@ def confirmar():
         caja_obs_detergente.delete(0, tk.END)
         caja_p_monotributo.delete(0,tk.END)
         caja_obs_monotributo.delete(0, tk.END)
+        caja_p_otros1.delete(0,tk.END)
+        caja_obs_otros1.delete(0, tk.END)
+        caja_p_otros2.delete(0,tk.END)
+        caja_obs_otros2.delete(0, tk.END)
+        caja_p_otros3.delete(0,tk.END)
+        caja_obs_otros3.delete(0, tk.END)
         
         caja_total.delete(0,tk.END)    
+        cambiar_tarjeta_valor()
 
 
 def borrar_datos():
@@ -356,6 +399,19 @@ def borrar_datos():
     caja_obs_detergente.delete(0, tk.END)
     caja_p_monotributo.delete(0,tk.END)
     caja_obs_monotributo.delete(0, tk.END)
+    caja_p_otros1.delete(0,tk.END)
+    caja_obs_otros1.delete(0, tk.END)
+    caja_p_otros2.delete(0,tk.END)
+    caja_obs_otros2.delete(0, tk.END)
+    caja_p_otros3.delete(0,tk.END)
+    caja_obs_otros3.delete(0, tk.END)
+    
+    cambiar_tarjeta_valor()
+
+
+def checkbox_clicked():
+    rta = tarjeta_valor.get()
+    return rta
 
 
 ### EXCEL INICIAL
@@ -376,6 +432,12 @@ obser_fijos = ttk.Label(text='Observación a realizar').place(x=680, y=40)
 
 cv = ttk.Label(text='Panel de costos VARIOS:').place(x=20,y=15)
 cf = ttk.Label(text='Panel de costos FIJOS:').place(x=500,y=15)
+
+### CHECKBOX
+tarjeta_valor = tk.IntVar()
+tarjeta = ttk.Checkbutton(text='Pago con tarjeta?', variable=tarjeta_valor, command=checkbox_clicked)
+tarjeta.place(x=500, y=585)
+
 
 ## COSTOS VARIOS
 label_queso = ttk.Label(text='Horma queso  ==> ')
@@ -444,6 +506,12 @@ label_detergente = ttk.Label(text='Detergente  ==> ')
 label_detergente.place(x=500,y=235)
 label_monotributo = ttk.Label(text='Monotributo  => ')
 label_monotributo.place(x=500,y=260)
+label_otros1 = ttk.Label(text='Otros  => ')
+label_otros1.place(x=500,y=285)
+label_otros2 = ttk.Label(text='Otros  => ')
+label_otros2.place(x=500,y=310)
+label_otros3 = ttk.Label(text='Otros  => ')
+label_otros3.place(x=500,y=335)
 
 ### CAJAS
 ## COSTOS VARIOS
@@ -678,7 +746,7 @@ caja_t_calabaza.place(x=345, y=610,width=80)
 caja_t_calabaza.insert(tk.END,'')
 
 caja_total = ttk.Entry()
-caja_total.place(x=595, y=615, width=80)
+caja_total.place(x=500, y=615, width=160)
 caja_total.insert(tk.END,'')
 
 ## COSTOS FIJOS
@@ -745,13 +813,34 @@ caja_obs_monotributo = ttk.Entry()
 caja_obs_monotributo.place(x=680, y=260,width=180)
 caja_obs_monotributo.insert(tk.END,'')
 
+caja_p_otros1 = ttk.Entry()
+caja_p_otros1.place(x=590, y=285,width=80)
+caja_p_otros1.insert(tk.END,'')
+caja_obs_otros1 = ttk.Entry()
+caja_obs_otros1.place(x=680, y=285,width=180)
+caja_obs_otros1.insert(tk.END,'')
+
+caja_p_otros2 = ttk.Entry()
+caja_p_otros2.place(x=590, y=310,width=80)
+caja_p_otros2.insert(tk.END,'')
+caja_obs_otros2 = ttk.Entry()
+caja_obs_otros2.place(x=680, y=310,width=180)
+caja_obs_otros2.insert(tk.END,'')
+
+caja_p_otros3 = ttk.Entry()
+caja_p_otros3.place(x=590, y=335,width=80)
+caja_p_otros3.insert(tk.END,'')
+caja_obs_otros3 = ttk.Entry()
+caja_obs_otros3.place(x=680, y=335,width=180)
+caja_obs_otros3.insert(tk.END,'')
+
 ## BOTONES - MESSAGE BOX
 costos = ttk.Button(text='Totalizar costos',command=mult)
-costos.place(x=590,y=650)
+costos.place(x=500,y=650)
 costos.winfo_class()
 
 confirmacion = ttk.Button(text='Confirmar costos', command=confirmar)
-confirmacion.place(x=700,y=650)
+confirmacion.place(x=595,y=650)
 
 boton_borrar = ttk.Button(text='Borrar datos', command=borrar_datos)
 boton_borrar.place(x=345,y=650)
