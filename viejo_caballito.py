@@ -28,6 +28,7 @@ lista_alfajor = []
 lista_medialuna = []
 lista_ensa_fruta = []
 lista_gaseosa = []
+lista_por_papas = []
 
 
 def comprobar_archivo():
@@ -91,6 +92,7 @@ def confirmar():
         texto_media.delete(0,tk.END)
         texto_ensa_fru.delete(0,tk.END)
         texto_gaseosa.delete(0,tk.END)
+        texto_papas.delete(0,tk.END)
         cambiar_tarjeta_valor()
 
         facturacion.delete(0,tk.END)
@@ -122,6 +124,7 @@ def cancelar():
         texto_media.delete(0,tk.END)
         texto_ensa_fru.delete(0,tk.END)
         texto_gaseosa.delete(0,tk.END)
+        texto_papas.delete(0,tk.END)
         cambiar_tarjeta_valor()
 
         facturacion.delete(0,tk.END)
@@ -145,7 +148,7 @@ def contenido(texto):
 def suma():
     hora = time.asctime()        
     if facturacion.get() == '':
-        precio_empanada,precio_tarta,precio_menu,precio_tortilla,precio_fruta,precio_cafe,precio_alfa,precio_media,precio_ensa_fruta,precio_gaseosa = 60, 100, 250, 120,50,70,50,25,100,100
+        precio_empanada,precio_tarta,precio_menu,precio_tortilla,precio_fruta,precio_cafe,precio_alfa,precio_media,precio_ensa_fruta,precio_gaseosa,precio_papas = 60, 100, 250, 120,50,70,50,25,100,100,100
 
         carne = contenido(texto_carne)
         pollo = contenido(texto_pollo)
@@ -166,10 +169,11 @@ def suma():
         medialuna = contenido(texto_media)
         ensa_fruta = contenido(texto_ensa_fru)
         gaseosa = contenido(texto_gaseosa)
+        papas = contenido(texto_papas)
 
         total_empa = (carne+pollo+jq+ver+cq) * precio_empanada
         total_tarta = (tarta_jq +tarta_puerro+tarta_beren+tarta_acelga+tarta_cala+tarta_zapa) * precio_tarta
-        total_otros = (menu*precio_menu+tortilla*precio_tortilla+fruta*precio_fruta+cafe*precio_cafe+alfa*precio_alfa+medialuna*precio_media+ensa_fruta*precio_ensa_fruta+gaseosa*precio_gaseosa) 
+        total_otros = (menu*precio_menu+tortilla*precio_tortilla+fruta*precio_fruta+cafe*precio_cafe+alfa*precio_alfa+medialuna*precio_media+ensa_fruta*precio_ensa_fruta+gaseosa*precio_gaseosa+papas*precio_papas) 
         total_productos = total_empa + total_tarta + total_otros
         facturacion.insert("0", total_productos)
     else:
@@ -195,10 +199,11 @@ def suma():
         medialuna = contenido(texto_media)
         ensa_fruta = contenido(texto_ensa_fru)
         gaseosa = contenido(texto_gaseosa)
+        papas = contenido(texto_papas)
 
         total_empa = (carne+pollo+jq+ver+cq) * precio_empanada
         total_tarta = (tarta_jq +tarta_puerro+tarta_beren+tarta_acelga+tarta_cala+tarta_zapa) * precio_tarta
-        total_otros = (menu*precio_menu+tortilla*precio_tortilla+fruta*precio_fruta+cafe*precio_cafe+alfa*precio_alfa+medialuna*precio_media+ensa_fruta*precio_ensa_fruta+gaseosa*precio_gaseosa) 
+        total_otros = (menu*precio_menu+tortilla*precio_tortilla+fruta*precio_fruta+cafe*precio_cafe+alfa*precio_alfa+medialuna*precio_media+ensa_fruta*precio_ensa_fruta+gaseosa*precio_gaseosa+papas*precio_papas) 
         total_productos = total_empa + total_tarta + total_otros
         facturacion.insert("0", total_productos)
 
@@ -222,8 +227,9 @@ def suma():
     lista_medialuna.append(medialuna)
     lista_ensa_fruta.append(ensa_fruta)
     lista_gaseosa.append(gaseosa)
+    lista_por_papas.append(papas)
 
-    al_excel = [hora, carne, jq, pollo, ver, cq, tarta_jq, tarta_puerro, tarta_beren, tarta_acelga, tarta_cala, tarta_zapa,menu, tortilla,fruta,cafe,alfa,medialuna,ensa_fruta,gaseosa,pago_tarjeta,total_productos]
+    al_excel = [hora, carne, jq, pollo, ver, cq, tarta_jq, tarta_puerro, tarta_beren, tarta_acelga, tarta_cala, tarta_zapa,menu, tortilla,fruta,cafe,alfa,medialuna,ensa_fruta,gaseosa,papas,pago_tarjeta,total_productos]
     guardar_datos(al_excel)
     lista_productos()
 
@@ -269,6 +275,8 @@ def borrar_datos():
     texto_media.delete(0,tk.END)
     texto_ensa_fru.delete(0,tk.END)
     texto_gaseosa.delete(0,tk.END) 
+    texto_papas.delete(0,tk.END) 
+
     cambiar_tarjeta_valor()
 
     facturacion.delete(0,tk.END)
@@ -358,6 +366,10 @@ texto_ensa_fru.insert(tk.END,"")
 texto_gaseosa = ttk.Entry()
 texto_gaseosa.place(x=700, y=250)
 texto_gaseosa.insert(tk.END,"")
+texto_papas = ttk.Entry()
+texto_papas.place(x=700, y=275)
+texto_papas.insert(tk.END,"")
+
 
 # CAJAS FACTURACION/VUELTO/PAGO
 facturacion = ttk.Entry()
@@ -413,6 +425,8 @@ lab_ensalada_fruta=ttk.Label(text='Cantidad de ENSALADAS DE FRUTA: ')
 lab_ensalada_fruta.place(x=500, y=225)
 lab_gaseosa=ttk.Label(text='Cantidad de GASEOSAS: ')
 lab_gaseosa.place(x=500, y=250)
+lab_papas=ttk.Label(text='Cantidad de PORCION DE PAPAS: ')
+lab_papas.place(x=500, y=275)
 
 
 # ETIQUETAS FACTURACION/VUELTO/PAGO
