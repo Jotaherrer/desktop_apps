@@ -308,7 +308,7 @@ ventana.title("Aplicación de ventas - Viejo Caballito Bar")
 ### CHECKBOX
 tarjeta_valor = tk.IntVar()
 tarjeta = ttk.Checkbutton(text='Pago con tarjeta?', variable=tarjeta_valor, command=checkbox_clicked)
-tarjeta.place(x=450, y=355)
+tarjeta.place(x=450, y=410)
 
 ## CAJAS
 # CAJAS EMPANADAS Y TARTAS
@@ -383,13 +383,13 @@ texto_pure.insert(tk.END,"")
 
 # CAJAS FACTURACION/VUELTO/PAGO
 facturacion = ttk.Entry()
-facturacion.place(x=300, y=380)
+facturacion.place(x=300, y=440)
 facturacion.insert(tk.END,'')
 paga_con = ttk.Entry()
-paga_con.place(x=300, y=410)
+paga_con.place(x=300, y=470)
 paga_con.insert(tk.END, '')
 vuelto = ttk.Entry()
-vuelto.place(x=300, y=440)
+vuelto.place(x=300, y=500)
 vuelto.insert(tk.END, '')
 
 ## ETIQUETAS
@@ -442,11 +442,11 @@ lab_pure.place(x=500, y=300)
 
 # ETIQUETAS FACTURACION/VUELTO/PAGO
 lab_fact = ttk.Label(text='Total a pagar: ')
-lab_fact.place(x=25, y=380)
+lab_fact.place(x=25, y=440)
 lab_paga = ttk.Label(text='Cliente paga con: ')
-lab_paga.place(x=25, y=410)
+lab_paga.place(x=25, y=470)
 lab_vuelto = ttk.Label(text='Vuelto a dar: ')
-lab_vuelto.place(x=25, y=440)
+lab_vuelto.place(x=25, y=500)
 
 
 ## BOTONES - MESSAGE BOX
@@ -455,9 +455,9 @@ cancelar = ttk.Button(text='Cancelar', command=cancelar)
 ingresar.place(x=550, y=480)
 cancelar.place(x=625, y=480)
 boton_calcular = ttk.Button(text='Calcular venta', command=suma)
-boton_calcular.place(x=450,y=380)
+boton_calcular.place(x=450,y=440)
 boton_vuelto = ttk.Button(text='Calcular vuelto', command=fun_vuelto)
-boton_vuelto.place(x=450, y=410)
+boton_vuelto.place(x=450, y=470)
 boton_borrar = ttk.Button(text='Borrar datos', command=borrar_datos)
 boton_borrar.place(x=700, y=480)
 
