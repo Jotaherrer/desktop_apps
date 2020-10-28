@@ -35,6 +35,15 @@ lista_por_papas = []
 lista_pure = []
 lista_cerveza = []
 
+
+precios = {'empanadas': 60,
+           'tartas': 200,
+           'platos': {'plato_sin_guar': 230, 'plato': 280,'tortilla': 220,'ensa': 250, 'ensa_chica': 150,
+                      'porcion_papas': 160, 'omelette': 200},
+           'cafeteria': {'cafe_chico': 80, 'jarrito': 90, 'cafe_leche': 120, 'lagrima': 90, 'te': 80 , 'cafe_llevar': 90,
+                         'alfa': 60,'media': 30,'ensa_fruta': 150, 'gaseosa':, 'agua': ,'cerveza':}}
+
+
 def comprobar_archivo():
     existe = os.path.exists('Ventas.xlsx')
     if existe:
@@ -44,7 +53,10 @@ def comprobar_archivo():
     else:
         wb = Workbook()
         ws = wb.active
-        titulo = ('Hora transacción',"Emp. Carne", 'Emp. Pollo', 'Emp. JQ', 'Emp. Verdura', 'Emp. CQ', 'Tar. JQ', 'Tar. Puerro', 'Tar. Beren.', 'Tar. Acelga', 'Tar. Calab.', 'Tar. Zapa.','Plato S/ Guarn.','Platos','Tortilla','Ensalada','Cafe','Alfajores','Medialunas','Ensa. Fruta','Gaseosa chica','Gaseosa grande','Porción papas','Porción puré','Cerveza','Descuentos','Tarjeta D.','Total')
+        titulo = ('Hora transacción',"Emp. Carne", 'Emp. Pollo', 'Emp. JQ', 'Emp. Verdura', 'Emp. CQ', 'Tar. JQ', 'Tar. Puerro',
+                  'Tar. Beren.', 'Tar. Acelga','Tar. Calab.', 'Tar. Zapa.','Plato S/ Guarn.','Platos','Tortilla','Ensalada','Cafe',
+                  'Alfajores','Medialunas','Ensa. Fruta','Gaseosa chica','Gaseosa grande','Porción papas','Porción puré',
+                  'Cerveza','Descuentos','Tarjeta D.','Total')
         ws.append(titulo)
         wb.save(filename='Ventas.xlsx')
         print('Creación exitosa del archivo')
@@ -53,7 +65,7 @@ def comprobar_archivo():
 def guardar_datos(pedido):
     wb = load_workbook(filename='Ventas.xlsx')
     wb.active.append(pedido)
-    wb.save('Ventas.xlsx')    
+    wb.save('Ventas.xlsx')
     print("Carga exitosa de la venta!!")
 
 
@@ -61,7 +73,7 @@ def lista_productos():
     pedido.delete(0, tk.END)
     c = len(empanadas_de_carne)
     pedido.insert('0',c)
-    
+
 
 def cambiar_tarjeta_valor():
     if tarjeta_valor.get() == int(1):
@@ -134,7 +146,7 @@ def cancelar():
         texto_media.delete(0,tk.END)
         texto_ensa_fru.delete(0,tk.END)
         texto_gaseosa.delete(0,tk.END)
-        texto_gaseosa_grande.delete(0,tk.END)        
+        texto_gaseosa_grande.delete(0,tk.END)
         texto_papas.delete(0,tk.END)
         texto_pure.delete(0,tk.END)
         texto_cerveza.delete(0,tk.END)
@@ -160,7 +172,7 @@ def contenido(texto):
 
 
 def suma():
-    hora = time.asctime()        
+    hora = time.asctime()
     if facturacion.get() == '':
         precio_empanada,precio_tarta,precio_menu_sin,precio_menu,precio_tortilla,precio_fruta,precio_cafe,precio_alfa,precio_media,precio_ensa_fruta,precio_gaseosa,precio_gaseosa_grande,precio_papas,precio_pure,precio_cerveza = 60, 100, 150,250, 120,50,70,50,25,100,100,200,125,125,150
 
@@ -192,7 +204,7 @@ def suma():
     else:
         facturacion.delete(0,tk.END)
         precio_empanada,precio_tarta,precio_menu_sin,precio_menu,precio_tortilla,precio_fruta,precio_cafe,precio_alfa,precio_media,precio_ensa_fruta,precio_gaseosa,precio_gaseosa_grande,precio_papas,precio_pure,precio_cerveza = 60, 100, 150,250, 120,50,70,50,25,100,100,200,125,125,150
-        
+
         carne = contenido(texto_carne)
         pollo = contenido(texto_pollo)
         jq = contenido(texto_jq)
@@ -204,7 +216,7 @@ def suma():
         tarta_acelga = contenido(texto_tar_acelga)
         tarta_cala = contenido(texto_tar_cala)
         tarta_zapa = contenido(texto_tar_zapa)
-        menu_sin = contenido(texto_menu_sin)        
+        menu_sin = contenido(texto_menu_sin)
         menu = contenido(texto_menu)
         tortilla = contenido(texto_tortilla)
         fruta = contenido(texto_fruta)
@@ -221,7 +233,7 @@ def suma():
     descuento_clientes = contenido(descuento)
     total_empa = (carne+pollo+jq+ver+cq) * precio_empanada
     total_tarta = (tarta_jq +tarta_puerro+tarta_beren+tarta_acelga+tarta_cala+tarta_zapa) * precio_tarta
-    total_otros = (menu_sin*precio_menu_sin+menu*precio_menu+tortilla*precio_tortilla+fruta*precio_fruta+cafe*precio_cafe+alfa*precio_alfa+medialuna*precio_media+ensa_fruta*precio_ensa_fruta+gaseosa*precio_gaseosa+precio_gaseosa_grande*gaseosa_grande+papas*precio_papas+precio_pure*pure+cerveza*precio_cerveza) 
+    total_otros = (menu_sin*precio_menu_sin+menu*precio_menu+tortilla*precio_tortilla+fruta*precio_fruta+cafe*precio_cafe+alfa*precio_alfa+medialuna*precio_media+ensa_fruta*precio_ensa_fruta+gaseosa*precio_gaseosa+precio_gaseosa_grande*gaseosa_grande+papas*precio_papas+precio_pure*pure+cerveza*precio_cerveza)
     total_productos = total_empa + total_tarta + total_otros - descuento_clientes
     facturacion.insert("0", total_productos)
 
@@ -267,7 +279,7 @@ def funcion_conjunta():
     venta_acumulada()
 
 
-def fun_vuelto():    
+def fun_vuelto():
     if vuelto.get() == '':
         if (float(facturacion.get()) > 0) & (float(paga_con.get()) >0):
             v = float(paga_con.get()) - float(facturacion.get())
@@ -309,10 +321,10 @@ def borrar_datos():
     texto_media.delete(0,tk.END)
     texto_ensa_fru.delete(0,tk.END)
     texto_gaseosa.delete(0,tk.END)
-    texto_gaseosa_grande.delete(0,tk.END)  
-    texto_papas.delete(0,tk.END) 
-    texto_pure.delete(0,tk.END) 
-    texto_cerveza.delete(0,tk.END) 
+    texto_gaseosa_grande.delete(0,tk.END)
+    texto_papas.delete(0,tk.END)
+    texto_pure.delete(0,tk.END)
+    texto_cerveza.delete(0,tk.END)
 
     cambiar_tarjeta_valor()
 
