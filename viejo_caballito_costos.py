@@ -56,6 +56,7 @@ def cambiar_tarjeta_valor():
 
 def contenido(caja_precio, caja_cantidad, total):
     try:
+        cantidad, precio = int(caja_cantidad.get(), int(caja_precio.get()))
         variable = int(caja_precio.get()) * int(caja_cantidad.get())
         total.insert('0',variable)
     except:
@@ -63,7 +64,7 @@ def contenido(caja_precio, caja_cantidad, total):
             variable = 0
         else:
             messagebox.showinfo(title='Error', message='Ingresar un número válido')
-    return variable
+    return variable, cantidad, precio
 
 
 def contenido_fijos(caja_precio, caja_obs):
@@ -84,29 +85,29 @@ def mult():
     if caja_total.get() == '':
         ## COMPLETA VALORES CON FUNCION 'CONTENIDO'
         # COSTOS VARIABLES
-        queso = contenido(caja_p_queso, caja_q_queso, caja_t_queso)
-        leche = contenido(caja_p_leche, caja_q_leche, caja_t_leche)
-        pollo = contenido(caja_p_pollo, caja_q_pollo, caja_t_pollo)
-        carne_p = contenido(caja_p_carnep, caja_q_carnep, caja_t_carnep)
-        tapa = contenido(caja_p_tapa, caja_q_tapa, caja_t_tapa)
-        cebolla = contenido(caja_p_cebolla, caja_q_cebolla, caja_t_cebolla)
-        pan = contenido(caja_p_pan, caja_q_pan, caja_t_pan)
-        tomate = contenido(caja_p_tomate, caja_q_tomate, caja_t_tomate)
-        lechuga = contenido(caja_p_lechuga, caja_q_lechuga, caja_t_lechuga)
-        yogur = contenido(caja_p_yogur, caja_q_yogur, caja_t_yogur)
-        agua = contenido(caja_p_agua, caja_q_agua, caja_t_agua)
-        nalga = contenido(caja_p_nalga, caja_q_nalga, caja_t_nalga)
-        empleados = contenido(caja_p_empleados, caja_q_empleados, caja_t_empleados)
-        acelga = contenido(caja_p_acelga, caja_q_acelga, caja_t_acelga)
-        huevos = contenido(caja_p_huevos, caja_q_huevos, caja_t_huevos)
-        servilletas = contenido(caja_p_servilletas, caja_q_servilletas, caja_t_servilletas)
-        yerba = contenido(caja_p_yerba, caja_q_yerba, caja_t_yerba)
-        cafe = contenido(caja_p_cafe, caja_q_cafe, caja_t_cafe)
-        jamon = contenido(caja_p_jamon, caja_q_jamon, caja_t_jamon)
-        puerro = contenido(caja_p_puerro, caja_q_puerro, caja_t_puerro)
-        beren = contenido(caja_p_beren, caja_q_beren, caja_t_beren)
-        papa = contenido(caja_p_papa, caja_q_papa, caja_t_papa)
-        cala = contenido(caja_p_calabaza, caja_q_calabaza, caja_t_calabaza)
+        queso, q_queso, p_queso = contenido(caja_p_queso, caja_q_queso, caja_t_queso)
+        leche, q_leche, p_leche = contenido(caja_p_leche, caja_q_leche, caja_t_leche)
+        pollo, q_pollo, p_pollo = contenido(caja_p_pollo, caja_q_pollo, caja_t_pollo)
+        carne_p, q_carne_p, p_carne_p = contenido(caja_p_carnep, caja_q_carnep, caja_t_carnep)
+        tapa, q_tapa, p_tapa = contenido(caja_p_tapa, caja_q_tapa, caja_t_tapa)
+        cebolla, q_cebolla, p_cebolla = contenido(caja_p_cebolla, caja_q_cebolla, caja_t_cebolla)
+        pan, q_pan, p_pan = contenido(caja_p_pan, caja_q_pan, caja_t_pan)
+        tomate, q_tomate, p_tomate = contenido(caja_p_tomate, caja_q_tomate, caja_t_tomate)
+        lechuga, q_lechuga, p_lechuga = contenido(caja_p_lechuga, caja_q_lechuga, caja_t_lechuga)
+        yogur, q_yogur, p_yogur = contenido(caja_p_yogur, caja_q_yogur, caja_t_yogur)
+        agua, q_agua, p_agua = contenido(caja_p_agua, caja_q_agua, caja_t_agua)
+        nalga, q_nalga, p_nalga = contenido(caja_p_nalga, caja_q_nalga, caja_t_nalga)
+        empleados, q_empleados, p_empleados = contenido(caja_p_empleados, caja_q_empleados, caja_t_empleados)
+        acelga, q_acelga, p_acelga = contenido(caja_p_acelga, caja_q_acelga, caja_t_acelga)
+        huevos, q_huevos, p_huevos = contenido(caja_p_huevos, caja_q_huevos, caja_t_huevos)
+        servilletas, q_servilletas, p_servilletas = contenido(caja_p_servilletas, caja_q_servilletas, caja_t_servilletas)
+        yerba, q_yerba, p_yerba = contenido(caja_p_yerba, caja_q_yerba, caja_t_yerba)
+        cafe, q_cafe, p_cafe = contenido(caja_p_cafe, caja_q_cafe, caja_t_cafe)
+        jamon, q_jamon, p_jamon = contenido(caja_p_jamon, caja_q_jamon, caja_t_jamon)
+        puerro, q_puerro, p_puerro = contenido(caja_p_puerro, caja_q_puerro, caja_t_puerro)
+        beren, q_beren, p_beren = contenido(caja_p_beren, caja_q_beren, caja_t_beren)
+        papa, q_papa, p_papa = contenido(caja_p_papa, caja_q_papa, caja_t_papa)
+        cala, q_cala, p_cala = contenido(caja_p_calabaza, caja_q_calabaza, caja_t_calabaza)
 
         # COSTOS FIJOS
         alquiler = contenido_fijos(caja_p_alquiler,caja_obs_alquiler)[0]
@@ -158,29 +159,29 @@ def mult():
 
         # COMPLETA NUEVAMENTE VALORES
         # COSTOS VARIABLES
-        queso = contenido(caja_p_queso, caja_q_queso, caja_t_queso)
-        leche = contenido(caja_p_leche, caja_q_leche, caja_t_leche)
-        pollo = contenido(caja_p_pollo, caja_q_pollo, caja_t_pollo)
-        carne_p = contenido(caja_p_carnep, caja_q_carnep, caja_t_carnep)
-        tapa = contenido(caja_p_tapa, caja_q_tapa, caja_t_tapa)
-        cebolla = contenido(caja_p_cebolla, caja_q_cebolla, caja_t_cebolla)
-        pan = contenido(caja_p_pan, caja_q_pan, caja_t_pan)
-        tomate = contenido(caja_p_tomate, caja_q_tomate, caja_t_tomate)
-        lechuga = contenido(caja_p_lechuga, caja_q_lechuga, caja_t_lechuga)
-        yogur = contenido(caja_p_yogur, caja_q_yogur, caja_t_yogur)
-        agua = contenido(caja_p_agua, caja_q_agua, caja_t_agua)
-        nalga = contenido(caja_p_nalga, caja_q_nalga, caja_t_nalga)
-        empleados = contenido(caja_p_empleados, caja_q_empleados, caja_t_empleados)
-        acelga = contenido(caja_p_acelga, caja_q_acelga, caja_t_acelga)
-        huevos = contenido(caja_p_huevos, caja_q_huevos, caja_t_huevos)
-        servilletas = contenido(caja_p_servilletas, caja_q_servilletas, caja_t_servilletas)
-        yerba = contenido(caja_p_yerba, caja_q_yerba, caja_t_yerba)
-        cafe = contenido(caja_p_cafe, caja_q_cafe, caja_t_cafe)
-        jamon = contenido(caja_p_jamon, caja_q_jamon, caja_t_jamon)
-        puerro = contenido(caja_p_puerro, caja_q_puerro, caja_t_puerro)
-        beren = contenido(caja_p_beren, caja_q_beren, caja_t_beren)
-        papa = contenido(caja_p_papa, caja_q_papa, caja_t_papa)
-        cala = contenido(caja_p_calabaza, caja_q_calabaza, caja_t_calabaza)
+        queso, q_queso, p_queso = contenido(caja_p_queso, caja_q_queso, caja_t_queso)
+        leche, q_leche, p_leche = contenido(caja_p_leche, caja_q_leche, caja_t_leche)
+        pollo, q_pollo, p_pollo = contenido(caja_p_pollo, caja_q_pollo, caja_t_pollo)
+        carne_p, q_carne_p, p_carne_p = contenido(caja_p_carnep, caja_q_carnep, caja_t_carnep)
+        tapa, q_tapa, p_tapa = contenido(caja_p_tapa, caja_q_tapa, caja_t_tapa)
+        cebolla, q_cebolla, p_cebolla = contenido(caja_p_cebolla, caja_q_cebolla, caja_t_cebolla)
+        pan, q_pan, p_pan = contenido(caja_p_pan, caja_q_pan, caja_t_pan)
+        tomate, q_tomate, p_tomate = contenido(caja_p_tomate, caja_q_tomate, caja_t_tomate)
+        lechuga, q_lechuga, p_lechuga = contenido(caja_p_lechuga, caja_q_lechuga, caja_t_lechuga)
+        yogur, q_yogur, p_yogur = contenido(caja_p_yogur, caja_q_yogur, caja_t_yogur)
+        agua, q_agua, p_agua = contenido(caja_p_agua, caja_q_agua, caja_t_agua)
+        nalga, q_nalga, p_nalga = contenido(caja_p_nalga, caja_q_nalga, caja_t_nalga)
+        empleados, q_empleados, p_empleados = contenido(caja_p_empleados, caja_q_empleados, caja_t_empleados)
+        acelga, q_acelga, p_acelga = contenido(caja_p_acelga, caja_q_acelga, caja_t_acelga)
+        huevos, q_huevos, p_huevos = contenido(caja_p_huevos, caja_q_huevos, caja_t_huevos)
+        servilletas, q_servilletas, p_servilletas = contenido(caja_p_servilletas, caja_q_servilletas, caja_t_servilletas)
+        yerba, q_yerba, p_yerba = contenido(caja_p_yerba, caja_q_yerba, caja_t_yerba)
+        cafe, q_cafe, p_cafe = contenido(caja_p_cafe, caja_q_cafe, caja_t_cafe)
+        jamon, q_jamon, p_jamon = contenido(caja_p_jamon, caja_q_jamon, caja_t_jamon)
+        puerro, q_puerro, p_puerro = contenido(caja_p_puerro, caja_q_puerro, caja_t_puerro)
+        beren, q_beren, p_beren = contenido(caja_p_beren, caja_q_beren, caja_t_beren)
+        papa, q_papa, p_papa = contenido(caja_p_papa, caja_q_papa, caja_t_papa)
+        cala, q_cala, p_cala = contenido(caja_p_calabaza, caja_q_calabaza, caja_t_calabaza)
 
         # COSTOS FIJOS
         alquiler = contenido_fijos(caja_p_alquiler,caja_obs_alquiler)[0]
