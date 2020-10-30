@@ -32,16 +32,16 @@ def comprobar_archivo():
 def guardar_datos_costos(pedido):
     wb = load_workbook(filename='Costos.xlsx')
     wb['Dato Costos'].append(pedido)
-    wb.save('Costos.xlsx')    
+    wb.save('Costos.xlsx')
     print("Carga exitosa del costo!!")
 
 
 def guardar_datos_obs(info):
     wb = load_workbook(filename='Costos.xlsx')
     wb['Observaciones'].append(info)
-    wb.save('Costos.xlsx')    
+    wb.save('Costos.xlsx')
     print("Carga exitosa de las observaciones!!")
-  
+
 
 def cambiar_tarjeta_valor():
     if tarjeta_valor.get() == int(1):
@@ -70,7 +70,7 @@ def contenido_fijos(caja_precio, caja_obs):
     try:
         variable = int(caja_precio.get())
         observacion = caja_obs.get()
-    except:    
+    except:
         if caja_precio.get() == '':
             variable = 0
             observacion = ''
@@ -80,7 +80,7 @@ def contenido_fijos(caja_precio, caja_obs):
 
 
 def mult():
-    hora = time.asctime()    
+    hora = time.asctime()
     if caja_total.get() == '':
         ## COMPLETA VALORES CON FUNCION 'CONTENIDO'
         # COSTOS VARIABLES
@@ -100,7 +100,7 @@ def mult():
         acelga = contenido(caja_p_acelga, caja_q_acelga, caja_t_acelga)
         huevos = contenido(caja_p_huevos, caja_q_huevos, caja_t_huevos)
         servilletas = contenido(caja_p_servilletas, caja_q_servilletas, caja_t_servilletas)
-        yerba = contenido(caja_p_yerba, caja_q_yerba, caja_t_yerba)        
+        yerba = contenido(caja_p_yerba, caja_q_yerba, caja_t_yerba)
         cafe = contenido(caja_p_cafe, caja_q_cafe, caja_t_cafe)
         jamon = contenido(caja_p_jamon, caja_q_jamon, caja_t_jamon)
         puerro = contenido(caja_p_puerro, caja_q_puerro, caja_t_puerro)
@@ -124,30 +124,35 @@ def mult():
 
     else:
         # BORRA CASILLEROS COMPLETOS
-        caja_total.delete(0,tk.END)
-        caja_t_queso.delete(0,tk.END)
-        caja_t_leche.delete(0,tk.END)
-        caja_t_pollo.delete(0,tk.END)
-        caja_t_carnep.delete(0,tk.END)
-        caja_t_tapa.delete(0,tk.END)
-        caja_t_cebolla.delete(0,tk.END)
-        caja_t_pan.delete(0,tk.END)
-        caja_t_tomate.delete(0,tk.END)
-        caja_t_lechuga.delete(0,tk.END)
-        caja_t_yogur.delete(0,tk.END)
-        caja_t_agua.delete(0,tk.END)
-        caja_t_nalga.delete(0,tk.END)
-        caja_t_empleados.delete(0, tk.END)
-        caja_t_acelga.delete(0,tk.END)
-        caja_t_huevos.delete(0,tk.END)
-        caja_t_servilletas.delete(0,tk.END)
-        caja_t_yerba.delete(0,tk.END)
-        caja_t_cafe.delete(0,tk.END)
-        caja_t_jamon.delete(0,tk.END)
-        caja_t_puerro.delete(0,tk.END)
-        caja_t_beren.delete(0,tk.END)
-        caja_t_papa.delete(0,tk.END)
-        caja_t_calabaza.delete(0,tk.END)
+        for caja in cajas:
+            try:
+                caja.delete(0, tk.END)
+            except:
+                pass
+        # caja_total.delete(0,tk.END)
+        # caja_t_queso.delete(0,tk.END)
+        # caja_t_leche.delete(0,tk.END)
+        # caja_t_pollo.delete(0,tk.END)
+        # caja_t_carnep.delete(0,tk.END)
+        # caja_t_tapa.delete(0,tk.END)
+        # caja_t_cebolla.delete(0,tk.END)
+        # caja_t_pan.delete(0,tk.END)
+        # caja_t_tomate.delete(0,tk.END)
+        # caja_t_lechuga.delete(0,tk.END)
+        # caja_t_yogur.delete(0,tk.END)
+        # caja_t_agua.delete(0,tk.END)
+        # caja_t_nalga.delete(0,tk.END)
+        # caja_t_empleados.delete(0, tk.END)
+        # caja_t_acelga.delete(0,tk.END)
+        # caja_t_huevos.delete(0,tk.END)
+        # caja_t_servilletas.delete(0,tk.END)
+        # caja_t_yerba.delete(0,tk.END)
+        # caja_t_cafe.delete(0,tk.END)
+        # caja_t_jamon.delete(0,tk.END)
+        # caja_t_puerro.delete(0,tk.END)
+        # caja_t_beren.delete(0,tk.END)
+        # caja_t_papa.delete(0,tk.END)
+        # caja_t_calabaza.delete(0,tk.END)
 
         cambiar_tarjeta_valor()
 
@@ -208,204 +213,16 @@ def confirmar():
     if caja_total == '':
         messagebox.showinfo(title='Error', message='Ingresar datos numéricos en el registro.')
     else:
-        # COSTOS VARIABLESW
-        caja_p_queso.delete(0,tk.END)
-        caja_q_queso.delete(0,tk.END)
-        caja_t_queso.delete(0,tk.END)
-        caja_p_leche.delete(0,tk.END)
-        caja_q_leche.delete(0,tk.END)
-        caja_t_leche.delete(0,tk.END)
-        caja_p_pollo.delete(0,tk.END)
-        caja_q_pollo.delete(0,tk.END)
-        caja_t_pollo.delete(0,tk.END)
-        caja_p_carnep.delete(0,tk.END)
-        caja_q_carnep.delete(0,tk.END)
-        caja_t_carnep.delete(0,tk.END)
-        caja_p_tapa.delete(0,tk.END)
-        caja_q_tapa.delete(0,tk.END)
-        caja_t_tapa.delete(0,tk.END)
-        caja_p_cebolla.delete(0,tk.END)
-        caja_q_cebolla.delete(0,tk.END)
-        caja_t_cebolla.delete(0,tk.END)
-        caja_p_pan.delete(0,tk.END)
-        caja_q_pan.delete(0,tk.END)
-        caja_t_pan.delete(0,tk.END)
-        caja_p_tomate.delete(0,tk.END)
-        caja_q_tomate.delete(0,tk.END)
-        caja_t_tomate.delete(0,tk.END)
-        caja_p_lechuga.delete(0,tk.END)
-        caja_q_lechuga.delete(0,tk.END)
-        caja_t_lechuga.delete(0,tk.END)
-        caja_p_yogur.delete(0,tk.END)
-        caja_q_yogur.delete(0,tk.END)
-        caja_t_yogur.delete(0,tk.END)
-        caja_p_agua.delete(0,tk.END)
-        caja_q_agua.delete(0,tk.END)
-        caja_t_agua.delete(0,tk.END)
-        caja_p_nalga.delete(0,tk.END)
-        caja_q_nalga.delete(0,tk.END)
-        caja_t_nalga.delete(0,tk.END)
-        caja_p_empleados.delete(0,tk.END)
-        caja_q_empleados.delete(0,tk.END)
-        caja_t_empleados.delete(0,tk.END)
-        caja_p_acelga.delete(0,tk.END)
-        caja_q_acelga.delete(0,tk.END)
-        caja_t_acelga.delete(0,tk.END)
-        caja_p_huevos.delete(0,tk.END)
-        caja_q_huevos.delete(0,tk.END)
-        caja_t_huevos.delete(0,tk.END)
-        caja_p_servilletas.delete(0,tk.END)
-        caja_q_servilletas.delete(0,tk.END)
-        caja_t_servilletas.delete(0,tk.END)
-        caja_p_yerba.delete(0,tk.END)
-        caja_q_yerba.delete(0,tk.END)
-        caja_t_yerba.delete(0,tk.END)
-        caja_p_cafe.delete(0,tk.END)
-        caja_q_cafe.delete(0,tk.END)
-        caja_t_cafe.delete(0,tk.END)
-        caja_p_jamon.delete(0,tk.END)
-        caja_q_jamon.delete(0,tk.END)
-        caja_t_jamon.delete(0,tk.END)
-        caja_p_puerro.delete(0,tk.END)
-        caja_q_puerro.delete(0,tk.END)
-        caja_t_puerro.delete(0,tk.END)
-        caja_p_beren.delete(0,tk.END)
-        caja_q_beren.delete(0,tk.END)
-        caja_t_beren.delete(0,tk.END)
-        caja_p_papa.delete(0,tk.END)
-        caja_q_papa.delete(0,tk.END)
-        caja_t_papa.delete(0,tk.END)
-        caja_p_calabaza.delete(0,tk.END)
-        caja_q_calabaza.delete(0,tk.END)
-        caja_t_calabaza.delete(0,tk.END)
-        # COSTOS FIJOS
-        caja_p_alquiler.delete(0,tk.END)
-        caja_obs_alquiler.delete(0, tk.END)
-        caja_p_luz.delete(0,tk.END)
-        caja_obs_luz.delete(0, tk.END)
-        caja_p_agua_servicio.delete(0,tk.END)
-        caja_obs_agua.delete(0, tk.END)
-        caja_p_telefono.delete(0,tk.END)
-        caja_obs_telefono.delete(0, tk.END)
-        caja_p_abl.delete(0,tk.END)
-        caja_obs_abl.delete(0, tk.END)
-        caja_p_diario.delete(0,tk.END)
-        caja_obs_diario.delete(0, tk.END)
-        caja_p_fumigador.delete(0,tk.END)
-        caja_obs_fumigador.delete(0, tk.END)
-        caja_p_detergente.delete(0,tk.END)
-        caja_obs_detergente.delete(0, tk.END)
-        caja_p_monotributo.delete(0,tk.END)
-        caja_obs_monotributo.delete(0, tk.END)
-        caja_p_otros1.delete(0,tk.END)
-        caja_obs_otros1.delete(0, tk.END)
-        caja_p_otros2.delete(0,tk.END)
-        caja_obs_otros2.delete(0, tk.END)
-        caja_p_otros3.delete(0,tk.END)
-        caja_obs_otros3.delete(0, tk.END)
-        
-        caja_total.delete(0,tk.END)    
+        for caja in cajas:
+            caja.delete(0, tk.END)
+
+        caja_total.delete(0,tk.END)
         cambiar_tarjeta_valor()
 
 
 def borrar_datos():
-    # COSTOS VARIABLES
-    caja_p_queso.delete(0,tk.END)
-    caja_q_queso.delete(0,tk.END)
-    caja_t_queso.delete(0,tk.END)
-    caja_p_leche.delete(0,tk.END)
-    caja_q_leche.delete(0,tk.END)
-    caja_t_leche.delete(0,tk.END)
-    caja_p_pollo.delete(0,tk.END)
-    caja_q_pollo.delete(0,tk.END)
-    caja_t_pollo.delete(0,tk.END)
-    caja_p_carnep.delete(0,tk.END)
-    caja_q_carnep.delete(0,tk.END)
-    caja_t_carnep.delete(0,tk.END)
-    caja_p_tapa.delete(0,tk.END)
-    caja_q_tapa.delete(0,tk.END)
-    caja_t_tapa.delete(0,tk.END)
-    caja_p_cebolla.delete(0,tk.END)
-    caja_q_cebolla.delete(0,tk.END)
-    caja_t_cebolla.delete(0,tk.END)
-    caja_p_pan.delete(0,tk.END)
-    caja_q_pan.delete(0,tk.END)
-    caja_t_pan.delete(0,tk.END)
-    caja_total.delete(0,tk.END) 
-    caja_p_tomate.delete(0,tk.END)
-    caja_q_tomate.delete(0,tk.END)
-    caja_t_tomate.delete(0,tk.END)
-    caja_p_lechuga.delete(0,tk.END)
-    caja_q_lechuga.delete(0,tk.END)
-    caja_t_lechuga.delete(0,tk.END)
-    caja_p_yogur.delete(0,tk.END)
-    caja_q_yogur.delete(0,tk.END)
-    caja_t_yogur.delete(0,tk.END)
-    caja_p_agua.delete(0,tk.END)
-    caja_q_agua.delete(0,tk.END)
-    caja_t_agua.delete(0,tk.END)
-    caja_p_nalga.delete(0,tk.END)
-    caja_q_nalga.delete(0,tk.END)
-    caja_t_nalga.delete(0,tk.END)
-    caja_p_empleados.delete(0,tk.END)
-    caja_q_empleados.delete(0,tk.END)
-    caja_t_empleados.delete(0,tk.END)
-    caja_p_acelga.delete(0,tk.END)
-    caja_q_acelga.delete(0,tk.END)
-    caja_t_acelga.delete(0,tk.END)
-    caja_p_huevos.delete(0,tk.END)
-    caja_q_huevos.delete(0,tk.END)
-    caja_t_huevos.delete(0,tk.END)
-    caja_p_servilletas.delete(0,tk.END)
-    caja_q_servilletas.delete(0,tk.END)
-    caja_t_servilletas.delete(0,tk.END)
-    caja_p_yerba.delete(0,tk.END)
-    caja_q_yerba.delete(0,tk.END)
-    caja_t_yerba.delete(0,tk.END)
-    caja_p_cafe.delete(0,tk.END)
-    caja_q_cafe.delete(0,tk.END)
-    caja_t_cafe.delete(0,tk.END)
-    caja_p_jamon.delete(0,tk.END)
-    caja_q_jamon.delete(0,tk.END)
-    caja_t_jamon.delete(0,tk.END)
-    caja_p_puerro.delete(0,tk.END)
-    caja_q_puerro.delete(0,tk.END)
-    caja_t_puerro.delete(0,tk.END)
-    caja_p_beren.delete(0,tk.END)
-    caja_q_beren.delete(0,tk.END)
-    caja_t_beren.delete(0,tk.END)
-    caja_p_papa.delete(0,tk.END)
-    caja_q_papa.delete(0,tk.END)
-    caja_t_papa.delete(0,tk.END)
-    caja_p_calabaza.delete(0,tk.END)
-    caja_q_calabaza.delete(0,tk.END)
-    caja_t_calabaza.delete(0,tk.END)
-    # COSTOS FIJOS
-    caja_p_alquiler.delete(0,tk.END)
-    caja_obs_alquiler.delete(0, tk.END)
-    caja_p_luz.delete(0,tk.END)
-    caja_obs_luz.delete(0, tk.END)
-    caja_p_agua_servicio.delete(0,tk.END)
-    caja_obs_agua.delete(0, tk.END)
-    caja_p_telefono.delete(0,tk.END)
-    caja_obs_telefono.delete(0, tk.END)
-    caja_p_abl.delete(0,tk.END)
-    caja_obs_abl.delete(0, tk.END)
-    caja_p_diario.delete(0,tk.END)
-    caja_obs_diario.delete(0, tk.END)
-    caja_p_fumigador.delete(0,tk.END)
-    caja_obs_fumigador.delete(0, tk.END)
-    caja_p_detergente.delete(0,tk.END)
-    caja_obs_detergente.delete(0, tk.END)
-    caja_p_monotributo.delete(0,tk.END)
-    caja_obs_monotributo.delete(0, tk.END)
-    caja_p_otros1.delete(0,tk.END)
-    caja_obs_otros1.delete(0, tk.END)
-    caja_p_otros2.delete(0,tk.END)
-    caja_obs_otros2.delete(0, tk.END)
-    caja_p_otros3.delete(0,tk.END)
-    caja_obs_otros3.delete(0, tk.END)
-    
+    for caja in cajas:
+        caja.delete(0, tk.END)
     cambiar_tarjeta_valor()
 
 
@@ -833,6 +650,24 @@ caja_p_otros3.insert(tk.END,'')
 caja_obs_otros3 = ttk.Entry()
 caja_obs_otros3.place(x=680, y=335,width=180)
 caja_obs_otros3.insert(tk.END,'')
+
+cajas = [caja_q_queso, caja_p_queso, caja_t_queso, caja_q_leche, caja_p_leche, caja_t_leche,
+         caja_p_pollo, caja_q_pollo, caja_t_pollo, caja_p_carnep, caja_t_carnep,
+         caja_q_carnep, caja_p_queso, caja_t_queso, caja_q_tapa, caja_p_tapa, caja_t_tapa,
+         caja_q_cebolla, caja_p_cebolla, caja_t_cebolla, caja_p_pan, caja_q_pan, caja_t_pan,
+         caja_q_tomate, caja_p_tomate, caja_t_tomate, caja_q_lechuga, caja_p_lechuga, caja_t_lechuga,
+         caja_q_yogur, caja_p_yogur, caja_t_yogur, caja_q_agua, caja_p_agua, caja_t_agua,
+         caja_q_nalga, caja_p_nalga, caja_t_nalga, caja_q_empleados, caja_p_empleados, caja_t_empleados,
+         caja_q_acelga, caja_p_acelga, caja_t_acelga, caja_q_huevos, caja_p_huevos, caja_t_huevos,
+         caja_q_servilletas, caja_p_servilletas, caja_q_yerba, caja_p_yerba, caja_q_cafe, caja_p_cafe, caja_t_cafe,
+         caja_q_jamon, caja_p_jamon, caja_t_jamon, caja_q_puerro, caja_p_puerro, caja_t_servilletas,
+         caja_q_beren, caja_p_beren, caja_t_beren, caja_q_papa, caja_p_papa, caja_t_yerba,
+         caja_q_calabaza, caja_p_calabaza, caja_t_calabaza, caja_p_alquiler, caja_obs_alquiler,
+         caja_p_luz, caja_obs_luz, caja_p_agua_servicio, caja_obs_agua, caja_t_puerro, caja_t_papa,
+         caja_p_telefono, caja_obs_telefono, caja_p_abl, caja_obs_abl, caja_p_diario, caja_obs_diario,
+         caja_p_fumigador, caja_obs_fumigador, caja_p_detergente, caja_obs_detergente, caja_p_monotributo,
+         caja_obs_monotributo, caja_p_otros1, caja_obs_otros1, caja_p_otros2, caja_obs_otros2,
+         caja_p_otros3, caja_obs_otros3]
 
 ## BOTONES - MESSAGE BOX
 costos = ttk.Button(text='Totalizar costos',command=mult)
