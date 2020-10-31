@@ -681,7 +681,7 @@ confirmacion = ttk.Button(text='Confirmar costos', command=confirmar)
 confirmacion.place(x=595,y=675)
 
 boton_borrar = ttk.Button(text='Borrar datos', command=borrar_datos)
-boton_borrar.place(x=690,y=675)
+boton_borrar.place(x=700,y=675)
 
 ventana.mainloop()
 
