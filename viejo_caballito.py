@@ -475,7 +475,7 @@ cajas = [texto_carne, texto_pollo, texto_jq, texto_verdura, texto_cq, texto_tar_
 
 ## ETIQUETAS
 # ETIQUETAS EMPANADAS Y TARTAS
-ttk.Label(text=f'Numero de pedido:').place(x=28, y=10)
+ttk.Label(text=f'Número de pedido:').place(x=28, y=10)
 ttk.Label(text="EMPANADAS").place(x=25, y=50)
 lab_carne=ttk.Label(text='CARNE: ')
 lab_carne.place(x=25, y=75)
