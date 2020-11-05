@@ -131,6 +131,9 @@ def get_price(lista_precios, palabra_clave):
     return precio
 
 
+def envio_excel(dataframe):
+
+
 sales_dict = {}
 for c in columns[:-3]:
     #if not sales_dict:
@@ -145,6 +148,13 @@ for c in columns[:-3]:
             sales_dict[c] = np.zeros(len(df_ventas))
             print('Stored zeros')
 
+# Calcular ventas totales
 ventas_final = pd.DataFrame(sales_dict, columns=columns[:-3], index=df_ventas.index.values)
 descuentos = df_ventas.loc[:, ['Descuentos', 'Tarjeta D.']]
 ventas_final = pd.merge(ventas_final, descuentos, left_index=True, right_index=True)
+ventas_final['Total Nuevo'] = np.sum(ventas_final, axis=1)
+# Agrupar por fecha
+ventas_agrupadas = ventas_final.groupby(ventas_final.index).sum().reset_index()
+ventas_agrupadas = ventas_agrupadas.groupby(ventas_agrupadas['index'].dt.date).sum()
+
+
