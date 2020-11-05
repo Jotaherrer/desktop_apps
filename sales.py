@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 
 precios = {'empanadas': 60, 'tartas': 200,
-           'platos': {'plato_sin_guar': 230, 'plato': 280, 'tortilla': 220, 'ensalada': 250, 'ensa_chica': 150,
+           'platos': {'plato_sin_guar': 230, 'plato_completo': 280, 'tortilla': 220, 'ensalada': 250, 'ensa_chica': 150,
                       'porcion_papas': 160, 'omelette': 200},
            'cafeteria': {'cafe_chico': 80, 'jarrito': 90, 'cafe_leche': 120, 'lagrima': 90, 'te': 80,
                          'cafe_llevar': 90, 'alfa': 60,'medialuna': 30},
@@ -53,19 +53,19 @@ def get_price(lista_precios, palabra_clave):
     elif palabra_clave[:3] == 'Tar':
         for t in lista_precios:
             e1, e2 = t[0], t[1]
-            if 'tar' in e1:
+            if 'tartas' in e1:
                 precio = e2
 
     elif palabra_clave[:8] == 'Plato S/':
         for t in lista_precios:
             e1, e2 = t[0], t[1]
-            if 'S/' in e1:
+            if 'sin_guar' in e1:
                 precio = e2
 
     elif palabra_clave[:7] == 'Platos':
         for t in lista_precios:
             e1, e2 = t[0], t[1]
-            if 'tos' in e1:
+            if 'plato_completo' in e1:
                 precio = e2
 
     elif palabra_clave[:8] == 'Tortilla':
@@ -83,33 +83,68 @@ def get_price(lista_precios, palabra_clave):
     elif palabra_clave[:4] == 'Cafe':
         for t in lista_precios:
             e1, e2 = t[0], t[1]
-            if 'afe' in e1:
+            if 'cafe_chico' in e1:
                 precio = e2
-
 
     elif palabra_clave[:9] == 'Alfajores':
         for t in lista_precios:
             e1, e2 = t[0], t[1]
-            if 'fajo' in e1:
+            if 'alfa' in e1:
                 precio = e2
 
 
-    elif palabra_clave[:9] == 'Ensalada':
+    elif palabra_clave[:5] == 'Media':
         for t in lista_precios:
             e1, e2 = t[0], t[1]
-            if 'tar' in e1:
+            if 'medialuna' in e1:
                 precio = e2
 
+    elif palabra_clave[:10] == 'Gaseosa ch':
+        for t in lista_precios:
+            e1, e2 = t[0], t[1]
+            if 'gaseosa' in e1:
+                precio = e2
 
+    elif palabra_clave[:10] == 'Gaseosa gr':
+        for t in lista_precios:
+            e1, e2 = t[0], t[1]
+            if 'agua' in e1:
+                precio = e2
+
+    elif palabra_clave[:13] == 'Porción papas':
+        for t in lista_precios:
+            e1, e2 = t[0], t[1]
+            if 'papas' in e1:
+                precio = e2
+
+    elif palabra_clave[:12] == 'Porción puré':
+        for t in lista_precios:
+            e1, e2 = t[0], t[1]
+            if 'papas' in e1:
+                precio = e2
+
+    elif palabra_clave[:5] == 'Cerve':
+        for t in lista_precios:
+            e1, e2 = t[0], t[1]
+            if 'cerv' in e1:
+                precio = e2
     return precio
 
 
 sales_dict = {}
-for c in columns[:-2]:
-    try:
-        col_ventas = df_ventas[c]
-        col_ventas = np.array(col_ventas.values) * get_price(listado, c)
-        sales_dict[c] = col_ventas
-        print(f'Correctly stored column ', c)
-    except:
-        print('Problem storing prduct price')
+for c in columns[:-3]:
+    #if not sales_dict:
+    #    sales_dict['Hora'] = df_ventas.index.values
+    #else:
+        try:
+            col_ventas = df_ventas[c]
+            col_ventas = np.array(col_ventas.values) * get_price(listado, c)
+            sales_dict[c] = col_ventas
+            print(f'Correctly stored column ', c)
+        except:
+            sales_dict[c] = np.zeros(len(df_ventas))
+            print('Stored zeros')
+
+ventas_final = pd.DataFrame(sales_dict, columns=columns[:-3], index=df_ventas.index.values)
+descuentos = df_ventas.loc[:, ['Descuentos', 'Tarjeta D.']]
+ventas_final = pd.merge(ventas_final, descuentos, left_index=True, right_index=True)
