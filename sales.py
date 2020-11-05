@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import os, xlwings as xw
 
 precios = {'empanadas': 60, 'tartas': 200,
            'platos': {'plato_sin_guar': 230, 'plato_completo': 280, 'tortilla': 220, 'ensalada': 250, 'ensa_chica': 150,
@@ -131,7 +132,18 @@ def get_price(lista_precios, palabra_clave):
     return precio
 
 
-def envio_excel(dataframe):
+def envio_excel(dataframe_ventas, dataframe_ventas_diarias):
+    if os.path.exists('data_powerbi.xlsx'):
+        wb = xw.Book('data_powerbi.xlsx')
+        # SHEET VENTAS GENERAL
+        ws = wb.sheets('ventas')
+        ws.range('A1').expand().value = dataframe_ventas
+        # SHEET VENTAS DIARIAS
+        ws2 = wb.sheets('ventas diarias')
+        ws2.range('A1').expand().value = dataframe_ventas_diarias
+        print('Carga exitosa de datos!')
+    else:
+        print('Archivo no existente..')
 
 
 sales_dict = {}
@@ -148,6 +160,7 @@ for c in columns[:-3]:
             sales_dict[c] = np.zeros(len(df_ventas))
             print('Stored zeros')
 
+
 # Calcular ventas totales
 ventas_final = pd.DataFrame(sales_dict, columns=columns[:-3], index=df_ventas.index.values)
 descuentos = df_ventas.loc[:, ['Descuentos', 'Tarjeta D.']]
@@ -156,5 +169,5 @@ ventas_final['Total Nuevo'] = np.sum(ventas_final, axis=1)
 # Agrupar por fecha
 ventas_agrupadas = ventas_final.groupby(ventas_final.index).sum().reset_index()
 ventas_agrupadas = ventas_agrupadas.groupby(ventas_agrupadas['index'].dt.date).sum()
-
-
+# Pasaje a Excel de informacion
+envio_excel(ventas_final, ventas_agrupadas)
