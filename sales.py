@@ -1,7 +1,9 @@
 import pandas as pd
 import numpy as np
 import os, xlwings as xw
+import datetime as dt
 
+# Almacenamiento de precios
 precios = {'empanadas': 60, 'tartas': 200,
            'platos': {'plato_sin_guar': 230, 'plato_completo': 280, 'tortilla': 220, 'ensalada': 250, 'ensa_chica': 150,
                       'porcion_papas': 160, 'omelette': 200},
@@ -10,9 +12,11 @@ precios = {'empanadas': 60, 'tartas': 200,
            'postre': {'ensa_fruta': 150,'flan': 100},
            'bebida': {'gaseosa': 80,'agua': 75,'cerveza': 100}}
 
+# Descarga de datos del excel de la aplicacion
 df_ventas = pd.read_excel('Ventas.xlsx', header=0, index_col=0, parse_dates=True)
 df_costos = pd.read_excel('Costos.xlsx', header=0, index_col=0, parse_dates=True)
 
+# Extraccion de precios del diccionario de precios en formato de lista de tuplas para ser utilizado.
 lista_productos = []
 lista_precios = []
 
@@ -43,7 +47,7 @@ for ind, row in df_ventas.iterrows():
 
 columns = df_ventas.columns.values
 
-
+# Creo funciones de obtencion de precio y envio de informacion procesada a excel
 def get_price(lista_precios, palabra_clave):
     if palabra_clave[:3] == 'Emp':
         for t in lista_precios:
@@ -132,7 +136,7 @@ def get_price(lista_precios, palabra_clave):
     return precio
 
 
-def envio_excel(dataframe_ventas, dataframe_ventas_diarias):
+def envio_excel(dataframe_ventas, dataframe_ventas_diarias, dataframe_costos, dataframe_costos_diarios):
     if os.path.exists('data_powerbi.xlsx'):
         wb = xw.Book('data_powerbi.xlsx')
         # SHEET VENTAS GENERAL
@@ -141,11 +145,17 @@ def envio_excel(dataframe_ventas, dataframe_ventas_diarias):
         # SHEET VENTAS DIARIAS
         ws2 = wb.sheets('ventas diarias')
         ws2.range('A1').expand().value = dataframe_ventas_diarias
+        # SHEET COSTOS GENERAL
+        ws3 = wb.sheets('costos')
+        ws3.range('A1').expand().value = dataframe_costos
+        # SHEET COSTOS DIARIOS
+        ws4 = wb.sheets('costos diarios')
+        ws4.range('A1').expand().value = dataframe_costos_diarios
         print('Carga exitosa de datos!')
     else:
         print('Archivo no existente..')
 
-
+# Almaceno informacion de PxQ en el diccionario "sales_dict" para luego hacer un dataframe
 sales_dict = {}
 for c in columns[:-3]:
     #if not sales_dict:
@@ -169,5 +179,45 @@ ventas_final['Total Nuevo'] = np.sum(ventas_final, axis=1)
 # Agrupar por fecha
 ventas_agrupadas = ventas_final.groupby(ventas_final.index).sum().reset_index()
 ventas_agrupadas = ventas_agrupadas.groupby(ventas_agrupadas['index'].dt.date).sum()
+
+# Calcular costos totales
+costos_final = df_costos.reset_index()
+dates = []
+for d in costos_final['Hora transacción'].values:
+    d_new = pd.to_datetime(d)
+    year = d_new.year
+    month = d_new.month
+    day = d_new.day
+    dates.append((int(year),int(month),int(day)))
+
+n_dates = []
+for d in dates:
+    year,month,day = d
+    d_n = dt.datetime(year,month,day)
+    n_dates.append(d_n)
+
+costos_agrupados = costos_final
+costos_agrupados['Hora transacción'] = n_dates
+costos_agrupados = costos_agrupados.groupby('Hora transacción').sum()
+for i in range(len(costos_agrupados)):
+    if i < 9:
+        costos_agrupados.Empleados.values[i] = 660
+        costos_agrupados.Huevos.values[i] = 0
+    else:
+        costos_agrupados.Empleados.values[i] = 875
+        costos_agrupados.Huevos.values[i] = 0
+
+costos_agrupados = costos_agrupados[costos_agrupados.columns.values[:-1]]
+costos_agrupados['Final'] = np.sum(costos_agrupados, axis=1)
+costos_final.set_index('Hora transacción', inplace=True)
+
+for i in range(len(costos_final)):
+    costos_final.Huevos.values[i] = 0
+for i in range(len(costos_final)):
+    costos_final.Empleados.values[i] = 0
+
+costos_final = costos_final[costos_final.columns.values[:-1]]
+costos_final['Final'] = np.sum(costos_final, axis=1)
+
 # Pasaje a Excel de informacion
-envio_excel(ventas_final, ventas_agrupadas)
+envio_excel(ventas_final, ventas_agrupadas, costos_final , costos_agrupados)
