@@ -67,7 +67,7 @@ def get_price(lista_precios, palabra_clave):
             if 'sin_guar' in e1:
                 precio = e2
 
-    elif palabra_clave[:7] == 'Platos':
+    elif 'Plato del Día' in palabra_clave:
         for t in lista_precios:
             e1, e2 = t[0], t[1]
             if 'plato_completo' in e1:
@@ -85,10 +85,46 @@ def get_price(lista_precios, palabra_clave):
             if 'lada' in e1:
                 precio = e2
 
-    elif palabra_clave[:4] == 'Cafe':
+    elif palabra_clave[:5] == 'Ensa.':
+        for t in lista_precios:
+            e1, e2 = t[0], t[1]
+            if '_chica' in e1:
+                precio = e2
+
+    elif palabra_clave[:7] == 'Cafe ch':
         for t in lista_precios:
             e1, e2 = t[0], t[1]
             if 'cafe_chico' in e1:
+                precio = e2
+
+    elif palabra_clave[:7] == 'Jarrito':
+        for t in lista_precios:
+            e1, e2 = t[0], t[1]
+            if 'jarrito' in e1:
+                precio = e2
+
+    elif palabra_clave[:7] == 'Cafe C/':
+        for t in lista_precios:
+            e1, e2 = t[0], t[1]
+            if 'cafe_leche' in e1:
+                precio = e2
+
+    elif palabra_clave[:8] == 'Cafe P/l':
+        for t in lista_precios:
+            e1, e2 = t[0], t[1]
+            if 'cafe_llevar' in e1:
+                precio = e2
+
+    elif palabra_clave[:2] == 'Te':
+        for t in lista_precios:
+            e1, e2 = t[0], t[1]
+            if 'te' in e1:
+                precio = e2
+
+    elif palabra_clave[:7] == 'Lagrima':
+        for t in lista_precios:
+            e1, e2 = t[0], t[1]
+            if 'lagrima' in e1:
                 precio = e2
 
     elif palabra_clave[:9] == 'Alfajores':
@@ -97,26 +133,37 @@ def get_price(lista_precios, palabra_clave):
             if 'alfa' in e1:
                 precio = e2
 
-
-    elif palabra_clave[:5] == 'Media':
+    elif 'Medialunas' in palabra_clave:
         for t in lista_precios:
             e1, e2 = t[0], t[1]
             if 'medialuna' in e1:
                 precio = e2
 
-    elif palabra_clave[:10] == 'Gaseosa ch':
+    elif palabra_clave[:6] == 'Gaseos':
         for t in lista_precios:
             e1, e2 = t[0], t[1]
             if 'gaseosa' in e1:
                 precio = e2
 
-    elif palabra_clave[:10] == 'Gaseosa gr':
+    elif palabra_clave[:8] == 'Ensa. Fr':
+        for t in lista_precios:
+            e1, e2 = t[0], t[1]
+            if 'ensa_fruta' in e1:
+                precio = e2
+
+    elif palabra_clave[:6] == 'Omelet':
+        for t in lista_precios:
+            e1, e2 = t[0], t[1]
+            if 'ome' in e1:
+                precio = e2
+
+    elif 'Agua' in palabra_clave:
         for t in lista_precios:
             e1, e2 = t[0], t[1]
             if 'agua' in e1:
                 precio = e2
 
-    elif palabra_clave[:13] == 'Porción papas':
+    elif palabra_clave[:13] == 'Papas':
         for t in lista_precios:
             e1, e2 = t[0], t[1]
             if 'papas' in e1:
@@ -133,8 +180,14 @@ def get_price(lista_precios, palabra_clave):
             e1, e2 = t[0], t[1]
             if 'cerv' in e1:
                 precio = e2
-    return precio
 
+    elif 'Flan' in palabra_clave:
+        for t in lista_precios:
+            e1, e2 = t[0], t[1]
+            if 'flan' in e1:
+                precio = e2
+
+    return precio
 
 def envio_excel(dataframe_ventas, dataframe_ventas_diarias, dataframe_costos, dataframe_costos_diarios):
     if os.path.exists('data_powerbi.xlsx'):
@@ -158,9 +211,6 @@ def envio_excel(dataframe_ventas, dataframe_ventas_diarias, dataframe_costos, da
 # Almaceno informacion de PxQ en el diccionario "sales_dict" para luego hacer un dataframe
 sales_dict = {}
 for c in columns[:-3]:
-    #if not sales_dict:
-    #    sales_dict['Hora'] = df_ventas.index.values
-    #else:
         try:
             col_ventas = df_ventas[c]
             col_ventas = np.array(col_ventas.values) * get_price(listado, c)
@@ -170,11 +220,11 @@ for c in columns[:-3]:
             sales_dict[c] = np.zeros(len(df_ventas))
             print('Stored zeros')
 
-
 # Calcular ventas totales
 ventas_final = pd.DataFrame(sales_dict, columns=columns[:-3], index=df_ventas.index.values)
 descuentos = df_ventas.loc[:, ['Descuentos', 'Tarjeta D.']]
 ventas_final = pd.merge(ventas_final, descuentos, left_index=True, right_index=True)
+ventas_final = ventas_final.iloc[1:]
 ventas_final['Total Nuevo'] = np.sum(ventas_final, axis=1)
 # Agrupar por fecha
 ventas_agrupadas = ventas_final.groupby(ventas_final.index).sum().reset_index()
@@ -221,3 +271,4 @@ costos_final['Final'] = np.sum(costos_final, axis=1)
 
 # Pasaje a Excel de informacion
 envio_excel(ventas_final, ventas_agrupadas, costos_final , costos_agrupados)
+
