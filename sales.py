@@ -13,8 +13,8 @@ precios = {'empanadas': 60, 'tartas': 200,
            'bebida': {'gaseosa': 80,'agua': 75,'cerveza': 100}}
 
 # Descarga de datos del excel de la aplicacion
-df_ventas = pd.read_excel('Ventas.xlsx', header=0, index_col=0, parse_dates=True)
-df_costos = pd.read_excel('Costos.xlsx', header=0, index_col=0, parse_dates=True)
+df_ventas = pd.read_excel('Ventas.xlsx', engine="openpyxl", header=0, index_col=0, parse_dates=True)
+df_costos = pd.read_excel('Costos.xlsx', engine="openpyxl", header=0, index_col=0, parse_dates=True)
 
 # Extraccion de precios del diccionario de precios en formato de lista de tuplas para ser utilizado.
 lista_productos = []
