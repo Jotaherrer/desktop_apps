@@ -94,29 +94,61 @@ def mult():
     if caja_total.get() == '':
         ## COMPLETA VALORES CON FUNCION 'CONTENIDO'
         # COSTOS VARIABLES
-        queso, q_queso, p_queso = contenido(caja_p_queso, caja_q_queso, caja_t_queso)
-        leche, q_leche, p_leche = contenido(caja_p_leche, caja_q_leche, caja_t_leche)
         pollo, q_pollo, p_pollo = contenido(caja_p_pollo, caja_q_pollo, caja_t_pollo)
-        carne_p, q_carne_p, p_carne_p = contenido(caja_p_carnep, caja_q_carnep, caja_t_carnep)
-        tapa, q_tapa, p_tapa = contenido(caja_p_tapa, caja_q_tapa, caja_t_tapa)
-        cebolla, q_cebolla, p_cebolla = contenido(caja_p_cebolla, caja_q_cebolla, caja_t_cebolla)
-        pan, q_pan, p_pan = contenido(caja_p_pan, caja_q_pan, caja_t_pan)
-        tomate, q_tomate, p_tomate = contenido(caja_p_tomate, caja_q_tomate, caja_t_tomate)
-        lechuga, q_lechuga, p_lechuga = contenido(caja_p_lechuga, caja_q_lechuga, caja_t_lechuga)
-        yogur, q_yogur, p_yogur = contenido(caja_p_yogur, caja_q_yogur, caja_t_yogur)
-        agua, q_agua, p_agua = contenido(caja_p_agua, caja_q_agua, caja_t_agua)
-        nalga, q_nalga, p_nalga = contenido(caja_p_nalga, caja_q_nalga, caja_t_nalga)
-        empleados, q_empleados, p_empleados = contenido(caja_p_empleados, caja_q_empleados, caja_t_empleados)
-        acelga, q_acelga, p_acelga = contenido(caja_p_acelga, caja_q_acelga, caja_t_acelga)
-        huevos, q_huevos, p_huevos = contenido(caja_p_huevos, caja_q_huevos, caja_t_huevos)
-        servilletas, q_servilletas, p_servilletas = contenido(caja_p_servilletas, caja_q_servilletas, caja_t_servilletas)
-        yerba, q_yerba, p_yerba = contenido(caja_p_yerba, caja_q_yerba, caja_t_yerba)
-        cafe, q_cafe, p_cafe = contenido(caja_p_cafe, caja_q_cafe, caja_t_cafe)
+        picada, q_picada, p_picada = contenido(caja_p_picada, caja_q_picada, cada_t_picada)
+        filet, q_filet, p_filet = contenido(caja_p_filet, caja_q_filet, caja_t_filet)
+        beef, q_beef, p_beef = contenido(caja_p_beef, caja_q_beef, caja_t_beef)
+        bondiola, q_bondola, p_bondiola = contenido(caja_p_bondiola, caja_q_bondiola, caja_t_bondiola)
         jamon, q_jamon, p_jamon = contenido(caja_p_jamon, caja_q_jamon, caja_t_jamon)
-        puerro, q_puerro, p_puerro = contenido(caja_p_puerro, caja_q_puerro, caja_t_puerro)
-        beren, q_beren, p_beren = contenido(caja_p_beren, caja_q_beren, caja_t_beren)
+        nalga, q_nalga, p_nalga = contenido(caja_p_nalga, caja_q_nalga, caja_t_nalga)
+        manteca, q_manteca, p_manteca = contenido(caja_p_manteca, caja_q_manteca, caja_t_manteca)
+        aceite, q_aceite, p_aceite = contenido(caja_p_aceite, caja_q_aceite, caja_t_aceite)
+        harina, q_harina, p_harina = contenido(caja_p_harina, caja_q_harina, caja_t_harina)
+        fideos, q_fideos, p_fideos = contenido(caja_p_fideos, caja_q_fideos, caja_t_fideos)
+        arroz, q_arroz, p_arroz = contenido(caja_p_arroz, caja_q_arroz, caja_t_arroz)
+        pure_tom, q_pure_tom, p_pure_tom = contenido(caja_p_pure_tom, caja_q_pure_tom, caja_t_pure_tom)
+        caldos, q_caldos, p_caldos = contenido(caja_p_caldos, caja_q_caldos, caja_t_caldos)
+        pan, q_pan, p_pan = contenido(caja_p_pan, caja_q_pan, caja_t_pan)
+        medialuna, q_medialuna, p_medialuna = contenido(caja_p_medial, caja_q_medial, caja_t_medial)
+        sodag, q_sodag, p_sodag = contenido(caja_p_sodag, caja_q_sodag, caja_t_sodag)
+        sodac, q_sodac, p_sodac = contenido(caja_p_sodac, caja_q_sodac, caja_t_sodac)
+        cerveza, q_cerveza, p_cerveza = contenido(caja_p_cerveza, caja_q_cerveza, caja_t_cerveza)
+        aguac, q_aguac, p_aguac = contenido(caja_p_aguac, caja_q_aguac, caja_t_aguac)
+        aguag, q_aguag, p_aguag = contenido(caja_p_aguag, caja_q_aguag, caja_t_aguag)
+        gaseosa, q_gaseosa, p_gaseosa = contenido(caja_p_gaseosa, caja_q_gaseosa, caja_t_gaseosa)
+        pan_rallado, q_pan_ra, p_pan_ra = contenido(caja_p_pan_rallado, caja_q_pan_rallado, caja_t_pan_rallado)
+        cebolla, q_cebolla, p_cebolla = contenido(caja_p_cebolla, caja_q_cebolla, caja_t_cebolla)
+        acelga, q_acelga, p_acelga = contenido(caja_p_acelga, caja_q_acelga, caja_t_acelga)
         papa, q_papa, p_papa = contenido(caja_p_papa, caja_q_papa, caja_t_papa)
-        cala, q_cala, p_cala = contenido(caja_p_calabaza, caja_q_calabaza, caja_t_calabaza)
+        cala, q_cala, p_cala = contenido(caja_p_cala, caja_q_cala, caja_t_cala)
+        zapallito, q_zapallito, p_zapallito = contenido(caja_p_zapa, caja_q_zapa, caja_t_zapa)
+        beren, q_beren, p_beren = contenido(caja_p_beren, caja_q_beren, caja_t_beren)
+        puerro, q_puerro, p_puerro = contenido(caja_p_puerro, caja_q_puerro, caja_t_puerro)
+        morron, q_morron, p_morron = contenido(caja_p_morron, caja_q_morron, caja_t_morron)
+        tomate, q_tomate, p_tomate = contenido(caja_p_tomate, caja_q_tomate, caja_t_tomate)
+        verdeo, q_verdeo, p_verdeo = contenido(caja_p_verdeo, caja_q_verdeo, caja_t_verdeo)
+        zanahoria, q_zana, p_zana = contenido(caja_p_zana, caja_q_zana, caja_t_zana)
+        ajo, q_ajo, p_ajo = contenido(caja_p_ajo, caja_q_ajo, caja_t_ajo)
+        pechuga, q_pechuga, p_pechuga = contenido(caja_p_pechuga, caja_q_pechuga, caja_t_pechuga)
+        batata, q_batata, p_batata = contenido(caja_p_batata, caja_q_batata, caja_t_batata)
+        limon, q_limon, p_limon = contenido(caja_p_limon, caja_q_limon, caja_t_limon)
+        pimenton, q_pimenton, p_pimenton = contenido(caja_p_pimenton, caja_q_pimenton, caja_t_pimenton)
+        pimienta, q_pimienta, p_pimienta = contenido(caja_p_pimienta, caja_q_pimienta, caja_t_pimienta)
+        provenzal, q_provenzal, p_provenzal = contenido(caja_p_provenzal, caja_q_provenzal, caja_t_provenzal)
+        nuez, q_nuez, p_nuez = contenido(caja_p_nuez, caja_q_nuez, caja_t_nuez)
+        laurel, q_laurel, p_laurel = contenido(caja_p_laurel, caja_q_laurel, caja_t_laurel)
+        tapas, q_tapas, p_tapas = contenido(caja_p_tapas, caja_q_tapas, caja_t_tapas)
+        noquiz, q_noquiz, p_noquiz = contenido(caja_p_noquiz, caja_q_noquiz, caja_t_noquiz)
+        huevos, q_huevos, p_huevos = contenido(caja_p_huevos, caja_q_huevos, caja_t_huevos)
+        te, q_te, p_te = contenido(caja_p_te, caja_q_te, caja_t_te)
+        azucar, q_azucar, p_azucar = contenido(caja_p_azucar, caja_q_azucar, caja_t_azucar)
+        yerba, q_yerba, p_yerba = contenido(caja_p_yerba, caja_q_yerba, caja_t_yerba)
+        edulco, q_edulco, p_edulco = contenido(caja_p_edulco, caja_q_edulco, caja_t_edulco)
+        capsula, q_capsula, p_capsula = contenido(caja_p_capsula, caja_q_capsula, caja_t_capsula)
+        molido, q_molido, p_molido = contenido(caja_p_molido, caja_q_molido, caja_t_molido)
+        cafe_kilo, q_cafe_kilo, p_cafe_kilo = contenido(caja_p_cafe_kilo, caja_q_cafe_kilo, caja_t_cafe_kilo)
+        vasos_cafe, q_vasos_cafe, p_vasos_cafe = contenido(caja_p_vasos_cafe, caja_q_vasos_cafe, caja_t_vasos_cafe)
+
 
         # COSTOS FIJOS
         alquiler = contenido_fijos(caja_p_alquiler,caja_obs_alquiler)[0]
@@ -128,7 +160,35 @@ def mult():
         fumigador = contenido_fijos(caja_p_fumigador, caja_obs_fumigador)[0]
         detergente = contenido_fijos(caja_p_detergente, caja_obs_fumigador)[0]
         monotributo = contenido_fijos(caja_p_monotributo, caja_obs_monotributo)[0]
-        otros1 = contenido_fijos(caja_p_otros1, caja_obs_otros1)[0]
+        gas = contenido_fijos(caja_p_gas, caja_obs_gas)[0]
+        tarjeta = contenido_fijos(caja_p_tarjeta, caja_obs_tarjeta)[0]
+        iibb = contenido_fijos(caja_p_iibb, caja_obs_iibb)[0]
+        otros = contenido_fijos(caja_p_otros, caja_obs_otros)[0]
+        # COSTOS FIJOS 2
+        flox = contenido(caja_p_flox, caja_q_flox, caja_t_flox)
+        carton = contenido(caja_p_carton, caja_q_carton, caja_t_carton)
+        sulfito = contenido(caja_p_sulfito, caja_q_sulfito, caja_t_sulfito)
+        film = contenido(caja_p_film, caja_q_film, caja_t_film)
+        serv_mesa = contenido(caja_p_serv_mesa, caja_q_serv_mesa, caja_t_serv_mesa)
+        serv_cocina = contenido(caja_p_serv_cocina, caja_q_serv_cocina, caja_t_serv_cocina)
+        cubiertos = contenido(caja_p_cubiertos, caja_q_cubiertos, caja_t_cubiertos)
+        bolsas_res = contenido(caja_p_bolsas_residuos, caja_q_bolsas_residuos, caja_t_bolsas_residuos)
+        bolsas_ped = contenido(caja_p_bolsas_pedidos, caja_q_bolsas_pedidos, caja_t_bolsas_pedidos)
+        remos = contenido(caja_p_remos, caja_q_remos, caja_t_remos)
+        higienico = contenido(caja_p_higienico, caja_q_higienico, caja_t_higienico)
+        platos = contenido(caja_p_platos, caja_q_platos, caja_t_platos)
+        band_ensa = contenido(caja_p_band_ensa, caja_q_band_ensa, caja_t_band_ensa)
+        band_pure = contenido(caja_p_band_pure, caja_q_band_pure, caja_t_band_pure)
+        band_tapa = contenido(caja_p_band_tapa, caja_q_band_tapa, caja_t_band_tapa)
+        alum = contenido(caja_p_alum, caja_q_alum, caja_t_alum)
+        detergente = contenido(caja_p_detergente, caja_q_detergente, caja_t_detergente)
+        lavandina = contenido(caja_p_lavan, caja_q_lavan, caja_t_lavan)
+        perfume = contenido(caja_p_perfume, caja_q_perfume, caja_t_perfume)
+        esponja = contenido(caja_p_esponja, caja_q_esponja, caja_t_esponja)
+        jabon = contenido(caja_p_jabon, caja_q_jabon, caja_t_jabon)
+        desengrasante = contenido(caja_p_desengrasante, caja_q_desengrasante, caja_t_desengrasante)
+        alcohol = contenido(caja_p_alcohol, caja_q_alcohol, caja_t_alcohol)
+
 
     else:
         # BORRA CASILLEROS COMPLETOS
@@ -142,29 +202,61 @@ def mult():
 
         # COMPLETA NUEVAMENTE VALORES
         # COSTOS VARIABLES
-        queso, q_queso, p_queso = contenido(caja_p_queso, caja_q_queso, caja_t_queso)
-        leche, q_leche, p_leche = contenido(caja_p_leche, caja_q_leche, caja_t_leche)
         pollo, q_pollo, p_pollo = contenido(caja_p_pollo, caja_q_pollo, caja_t_pollo)
-        carne_p, q_carne_p, p_carne_p = contenido(caja_p_carnep, caja_q_carnep, caja_t_carnep)
-        tapa, q_tapa, p_tapa = contenido(caja_p_tapa, caja_q_tapa, caja_t_tapa)
-        cebolla, q_cebolla, p_cebolla = contenido(caja_p_cebolla, caja_q_cebolla, caja_t_cebolla)
-        pan, q_pan, p_pan = contenido(caja_p_pan, caja_q_pan, caja_t_pan)
-        tomate, q_tomate, p_tomate = contenido(caja_p_tomate, caja_q_tomate, caja_t_tomate)
-        lechuga, q_lechuga, p_lechuga = contenido(caja_p_lechuga, caja_q_lechuga, caja_t_lechuga)
-        yogur, q_yogur, p_yogur = contenido(caja_p_yogur, caja_q_yogur, caja_t_yogur)
-        agua, q_agua, p_agua = contenido(caja_p_agua, caja_q_agua, caja_t_agua)
-        nalga, q_nalga, p_nalga = contenido(caja_p_nalga, caja_q_nalga, caja_t_nalga)
-        empleados, q_empleados, p_empleados = contenido(caja_p_empleados, caja_q_empleados, caja_t_empleados)
-        acelga, q_acelga, p_acelga = contenido(caja_p_acelga, caja_q_acelga, caja_t_acelga)
-        huevos, q_huevos, p_huevos = contenido(caja_p_huevos, caja_q_huevos, caja_t_huevos)
-        servilletas, q_servilletas, p_servilletas = contenido(caja_p_servilletas, caja_q_servilletas, caja_t_servilletas)
-        yerba, q_yerba, p_yerba = contenido(caja_p_yerba, caja_q_yerba, caja_t_yerba)
-        cafe, q_cafe, p_cafe = contenido(caja_p_cafe, caja_q_cafe, caja_t_cafe)
+        picada, q_picada, p_picada = contenido(caja_p_picada, caja_q_picada, cada_t_picada)
+        filet, q_filet, p_filet = contenido(caja_p_filet, caja_q_filet, caja_t_filet)
+        beef, q_beef, p_beef = contenido(caja_p_beef, caja_q_beef, caja_t_beef)
+        bondiola, q_bondola, p_bondiola = contenido(caja_p_bondiola, caja_q_bondiola, caja_t_bondiola)
         jamon, q_jamon, p_jamon = contenido(caja_p_jamon, caja_q_jamon, caja_t_jamon)
-        puerro, q_puerro, p_puerro = contenido(caja_p_puerro, caja_q_puerro, caja_t_puerro)
-        beren, q_beren, p_beren = contenido(caja_p_beren, caja_q_beren, caja_t_beren)
+        nalga, q_nalga, p_nalga = contenido(caja_p_nalga, caja_q_nalga, caja_t_nalga)
+        manteca, q_manteca, p_manteca = contenido(caja_p_manteca, caja_q_manteca, caja_t_manteca)
+        aceite, q_aceite, p_aceite = contenido(caja_p_aceite, caja_q_aceite, caja_t_aceite)
+        harina, q_harina, p_harina = contenido(caja_p_harina, caja_q_harina, caja_t_harina)
+        fideos, q_fideos, p_fideos = contenido(caja_p_fideos, caja_q_fideos, caja_t_fideos)
+        arroz, q_arroz, p_arroz = contenido(caja_p_arroz, caja_q_arroz, caja_t_arroz)
+        pure_tom, q_pure_tom, p_pure_tom = contenido(caja_p_pure_tom, caja_q_pure_tom, caja_t_pure_tom)
+        caldos, q_caldos, p_caldos = contenido(caja_p_caldos, caja_q_caldos, caja_t_caldos)
+        pan, q_pan, p_pan = contenido(caja_p_pan, caja_q_pan, caja_t_pan)
+        medialuna, q_medialuna, p_medialuna = contenido(caja_p_medial, caja_q_medial, caja_t_medial)
+        sodag, q_sodag, p_sodag = contenido(caja_p_sodag, caja_q_sodag, caja_t_sodag)
+        sodac, q_sodac, p_sodac = contenido(caja_p_sodac, caja_q_sodac, caja_t_sodac)
+        cerveza, q_cerveza, p_cerveza = contenido(caja_p_cerveza, caja_q_cerveza, caja_t_cerveza)
+        aguac, q_aguac, p_aguac = contenido(caja_p_aguac, caja_q_aguac, caja_t_aguac)
+        aguag, q_aguag, p_aguag = contenido(caja_p_aguag, caja_q_aguag, caja_t_aguag)
+        gaseosa, q_gaseosa, p_gaseosa = contenido(caja_p_gaseosa, caja_q_gaseosa, caja_t_gaseosa)
+        pan_rallado, q_pan_ra, p_pan_ra = contenido(caja_p_pan_rallado, caja_q_pan_rallado, caja_t_pan_rallado)
+        cebolla, q_cebolla, p_cebolla = contenido(caja_p_cebolla, caja_q_cebolla, caja_t_cebolla)
+        acelga, q_acelga, p_acelga = contenido(caja_p_acelga, caja_q_acelga, caja_t_acelga)
         papa, q_papa, p_papa = contenido(caja_p_papa, caja_q_papa, caja_t_papa)
-        cala, q_cala, p_cala = contenido(caja_p_calabaza, caja_q_calabaza, caja_t_calabaza)
+        cala, q_cala, p_cala = contenido(caja_p_cala, caja_q_cala, caja_t_cala)
+        zapallito, q_zapallito, p_zapallito = contenido(caja_p_zapa, caja_q_zapa, caja_t_zapa)
+        beren, q_beren, p_beren = contenido(caja_p_beren, caja_q_beren, caja_t_beren)
+        puerro, q_puerro, p_puerro = contenido(caja_p_puerro, caja_q_puerro, caja_t_puerro)
+        morron, q_morron, p_morron = contenido(caja_p_morron, caja_q_morron, caja_t_morron)
+        tomate, q_tomate, p_tomate = contenido(caja_p_tomate, caja_q_tomate, caja_t_tomate)
+        verdeo, q_verdeo, p_verdeo = contenido(caja_p_verdeo, caja_q_verdeo, caja_t_verdeo)
+        zanahoria, q_zana, p_zana = contenido(caja_p_zana, caja_q_zana, caja_t_zana)
+        ajo, q_ajo, p_ajo = contenido(caja_p_ajo, caja_q_ajo, caja_t_ajo)
+        pechuga, q_pechuga, p_pechuga = contenido(caja_p_pechuga, caja_q_pechuga, caja_t_pechuga)
+        batata, q_batata, p_batata = contenido(caja_p_batata, caja_q_batata, caja_t_batata)
+        limon, q_limon, p_limon = contenido(caja_p_limon, caja_q_limon, caja_t_limon)
+        pimenton, q_pimenton, p_pimenton = contenido(caja_p_pimenton, caja_q_pimenton, caja_t_pimenton)
+        pimienta, q_pimienta, p_pimienta = contenido(caja_p_pimienta, caja_q_pimienta, caja_t_pimienta)
+        provenzal, q_provenzal, p_provenzal = contenido(caja_p_provenzal, caja_q_provenzal, caja_t_provenzal)
+        nuez, q_nuez, p_nuez = contenido(caja_p_nuez, caja_q_nuez, caja_t_nuez)
+        laurel, q_laurel, p_laurel = contenido(caja_p_laurel, caja_q_laurel, caja_t_laurel)
+        tapas, q_tapas, p_tapas = contenido(caja_p_tapas, caja_q_tapas, caja_t_tapas)
+        noquiz, q_noquiz, p_noquiz = contenido(caja_p_noquiz, caja_q_noquiz, caja_t_noquiz)
+        huevos, q_huevos, p_huevos = contenido(caja_p_huevos, caja_q_huevos, caja_t_huevos)
+        te, q_te, p_te = contenido(caja_p_te, caja_q_te, caja_t_te)
+        azucar, q_azucar, p_azucar = contenido(caja_p_azucar, caja_q_azucar, caja_t_azucar)
+        yerba, q_yerba, p_yerba = contenido(caja_p_yerba, caja_q_yerba, caja_t_yerba)
+        edulco, q_edulco, p_edulco = contenido(caja_p_edulco, caja_q_edulco, caja_t_edulco)
+        capsula, q_capsula, p_capsula = contenido(caja_p_capsula, caja_q_capsula, caja_t_capsula)
+        molido, q_molido, p_molido = contenido(caja_p_molido, caja_q_molido, caja_t_molido)
+        cafe_kilo, q_cafe_kilo, p_cafe_kilo = contenido(caja_p_cafe_kilo, caja_q_cafe_kilo, caja_t_cafe_kilo)
+        vasos_cafe, q_vasos_cafe, p_vasos_cafe = contenido(caja_p_vasos_cafe, caja_q_vasos_cafe, caja_t_vasos_cafe)
+
 
         # COSTOS FIJOS
         alquiler = contenido_fijos(caja_p_alquiler,caja_obs_alquiler)[0]
@@ -176,7 +268,34 @@ def mult():
         fumigador = contenido_fijos(caja_p_fumigador, caja_obs_fumigador)[0]
         detergente = contenido_fijos(caja_p_detergente, caja_obs_fumigador)[0]
         monotributo = contenido_fijos(caja_p_monotributo, caja_obs_monotributo)[0]
-        otros1 = contenido_fijos(caja_p_otros1, caja_obs_otros1)[0]
+        gas = contenido_fijos(caja_p_gas, caja_obs_gas)[0]
+        tarjeta = contenido_fijos(caja_p_tarjeta, caja_obs_tarjeta)[0]
+        iibb = contenido_fijos(caja_p_iibb, caja_obs_iibb)[0]
+        otros = contenido_fijos(caja_p_otros, caja_obs_otros)[0]
+        # COSTOS FIJOS 2
+        flox = contenido(caja_p_flox, caja_q_flox, caja_t_flox)
+        carton = contenido(caja_p_carton, caja_q_carton, caja_t_carton)
+        sulfito = contenido(caja_p_sulfito, caja_q_sulfito, caja_t_sulfito)
+        film = contenido(caja_p_film, caja_q_film, caja_t_film)
+        serv_mesa = contenido(caja_p_serv_mesa, caja_q_serv_mesa, caja_t_serv_mesa)
+        serv_cocina = contenido(caja_p_serv_cocina, caja_q_serv_cocina, caja_t_serv_cocina)
+        cubiertos = contenido(caja_p_cubiertos, caja_q_cubiertos, caja_t_cubiertos)
+        bolsas_res = contenido(caja_p_bolsas_residuos, caja_q_bolsas_residuos, caja_t_bolsas_residuos)
+        bolsas_ped = contenido(caja_p_bolsas_pedidos, caja_q_bolsas_pedidos, caja_t_bolsas_pedidos)
+        remos = contenido(caja_p_remos, caja_q_remos, caja_t_remos)
+        higienico = contenido(caja_p_higienico, caja_q_higienico, caja_t_higienico)
+        platos = contenido(caja_p_platos, caja_q_platos, caja_t_platos)
+        band_ensa = contenido(caja_p_band_ensa, caja_q_band_ensa, caja_t_band_ensa)
+        band_pure = contenido(caja_p_band_pure, caja_q_band_pure, caja_t_band_pure)
+        band_tapa = contenido(caja_p_band_tapa, caja_q_band_tapa, caja_t_band_tapa)
+        alum = contenido(caja_p_alum, caja_q_alum, caja_t_alum)
+        detergente = contenido(caja_p_detergente, caja_q_detergente, caja_t_detergente)
+        lavandina = contenido(caja_p_lavan, caja_q_lavan, caja_t_lavan)
+        perfume = contenido(caja_p_perfume, caja_q_perfume, caja_t_perfume)
+        esponja = contenido(caja_p_esponja, caja_q_esponja, caja_t_esponja)
+        jabon = contenido(caja_p_jabon, caja_q_jabon, caja_t_jabon)
+        desengrasante = contenido(caja_p_desengrasante, caja_q_desengrasante, caja_t_desengrasante)
+        alcohol = contenido(caja_p_alcohol, caja_q_alcohol, caja_t_alcohol)
 
     pago_tarjeta = checkbox_clicked()
     costos_varios = queso + leche + pollo + carne_p + tapa + cebolla + pan + tomate + lechuga+yogur+agua+nalga+empleados + acelga + huevos + servilletas + yerba + cafe + jamon + puerro + beren + papa + cala
@@ -222,6 +341,7 @@ def borrar_datos():
 def checkbox_clicked():
     rta = tarjeta_valor.get()
     return rta
+
 
 ### EXCEL INICIAL
 comprobar_archivo()
@@ -415,7 +535,7 @@ label_abl = Label(my_frame2, text='ABL  ==> ')
 label_abl.place(x=475,y=160)
 label_diario = Label(my_frame2, text='Diario  ==> ')
 label_diario.place(x=475,y=185)
-label_seguro = Label(my_frame2, text='Seguro  ==> ')
+label_seguro = Label(my_frame2, text='Fumigador  ==> ')
 label_seguro.place(x=475,y=210)
 label_detergente = Label(my_frame2, text='Detergente  ==> ')
 label_detergente.place(x=475,y=235)
@@ -427,6 +547,9 @@ label_tarjeta = Label(my_frame2, text='Tarjeta  ==> ')
 label_tarjeta.place(x=475,y=310)
 label_iibb = Label(my_frame2, text='Ingresos Brutos=>')
 label_iibb.place(x=475,y=335)
+label_otros = Label(my_frame2, text='Otros =>')
+label_otros.place(x=475,y=360)
+
 
 # COSTOS FIJOS PARTE 2
 label_descartables = Label(my_frame2, text='DESCARTABLES:')
@@ -500,9 +623,9 @@ caja_q_picada.insert(tk.END,'')
 caja_p_picada = Entry(my_frame1)
 caja_p_picada.place(x=235, y=98,width=80)
 caja_p_picada.insert(tk.END,'')
-caja_q_picada = Entry(my_frame1)
-caja_q_picada.place(x=345, y=98,width=80)
-caja_q_picada.insert(tk.END,'')
+caja_t_picada = Entry(my_frame1)
+caja_t_picada.place(x=345, y=98,width=80)
+caja_t_picada.insert(tk.END,'')
 
 caja_q_filet = Entry(my_frame1)
 caja_q_filet.place(x=125, y=123,width=80)
@@ -1124,6 +1247,14 @@ caja_obs_iibb = Entry(my_frame2)
 caja_obs_iibb.place(x=690, y=335,width=200)
 caja_obs_iibb.insert(tk.END,'')
 
+caja_p_otros = Entry(my_frame2)
+caja_p_otros.place(x=580, y=360,width=80)
+caja_p_otros.insert(tk.END,'')
+caja_obs_otros = Entry(my_frame2)
+caja_obs_otros.place(x=690, y=360,width=200)
+caja_obs_otros.insert(tk.END,'')
+
+
 # CAJAS COSTOS FIJOS 2
 caja_q_flox = Entry(my_frame2)
 caja_q_flox.place(x=140, y=60,width=80)
@@ -1355,24 +1486,49 @@ caja_t_alcohol = Entry(my_frame2)
 caja_t_alcohol.place(x=360, y=635,width=80)
 caja_t_alcohol.insert(tk.END,'')
 
-"""
-cajas = [caja_q_queso, caja_p_queso, caja_t_queso, caja_q_leche, caja_p_leche, caja_t_leche,
-         caja_p_pollo, caja_q_pollo, caja_t_pollo, caja_p_carnep, caja_t_carnep,
-         caja_q_carnep, caja_p_queso, caja_t_queso, caja_q_tapa, caja_p_tapa, caja_t_tapa,
-         caja_q_cebolla, caja_p_cebolla, caja_t_cebolla, caja_p_pan, caja_q_pan, caja_t_pan,
-         caja_q_tomate, caja_p_tomate, caja_t_tomate, caja_q_lechuga, caja_p_lechuga, caja_t_lechuga,
-         caja_q_yogur, caja_p_yogur, caja_t_yogur, caja_q_agua, caja_p_agua, caja_t_agua,
-         caja_q_nalga, caja_p_nalga, caja_t_nalga, caja_q_empleados, caja_p_empleados, caja_t_empleados,
-         caja_q_acelga, caja_p_acelga, caja_t_acelga, caja_q_huevos, caja_p_huevos, caja_t_huevos,
-         caja_q_servilletas, caja_p_servilletas, caja_q_yerba, caja_p_yerba, caja_q_cafe, caja_p_cafe, caja_t_cafe,
-         caja_q_jamon, caja_p_jamon, caja_t_jamon, caja_q_puerro, caja_p_puerro, caja_t_servilletas,
-         caja_q_beren, caja_p_beren, caja_t_beren, caja_q_papa, caja_p_papa, caja_t_yerba,
-         caja_q_calabaza, caja_p_calabaza, caja_t_calabaza, caja_p_alquiler, caja_obs_alquiler,
-         caja_p_luz, caja_obs_luz, caja_p_agua_servicio, caja_obs_agua, caja_t_puerro, caja_t_papa,
-         caja_p_telefono, caja_obs_telefono, caja_p_abl, caja_obs_abl, caja_p_diario, caja_obs_diario,
-         caja_p_fumigador, caja_obs_fumigador, caja_p_detergente, caja_obs_detergente, caja_p_monotributo,
-         caja_obs_monotributo, caja_p_otros1, caja_obs_otros1]
-"""
+cajas = [caja_q_pollo, caja_p_pollo, caja_t_pollo, caja_q_picada, caja_p_picada, caja_t_picada,caja_q_filet,
+         caja_p_filet, caja_t_filet, caja_q_beef, caja_p_beef, caja_t_beef, caja_q_bondiola, caja_p_bondiola,
+         caja_t_bondiola, caja_q_jamon, caja_p_jamon, caja_t_jamon, caja_q_nalga, caja_p_nalga, caja_t_nalga,
+         caja_q_manteca, caja_p_manteca, caja_t_manteca, caja_q_aceite, caja_p_aceite, caja_t_aceite, caja_q_harina,
+         caja_p_harina, caja_t_harina, caja_q_fideos, caja_p_fideos, caja_t_fideos, caja_q_arroz, caja_p_arroz,
+         caja_t_arroz, caja_q_pure_tom, caja_p_pure_tom, caja_t_pure_tom, caja_q_caldos, caja_p_caldos,
+         caja_t_caldos, caja_q_pan, caja_p_pan, caja_t_pan, caja_q_medial, caja_p_medial, caja_t_medial,
+         caja_q_sodag, caja_p_sodag, caja_t_sodag, caja_q_sodac, caja_p_sodac, caja_t_sodac, caja_q_cerveza,
+         caja_p_cerveza, caja_t_cerveza, caja_q_aguac, caja_p_aguac, caja_t_aguac, caja_q_aguag, caja_p_aguag,
+         caja_t_aguag, caja_q_gaseosa, caja_p_aguag, caja_t_aguag, caja_q_gaseosa, caja_p_gaseosa, caja_t_gaseosa,
+         caja_q_pan_rallado, caja_p_pan_rallado, caja_t_pan_rallado, caja_q_cebolla, caja_p_cebolla, caja_t_cebolla,
+         caja_q_acelga, caja_p_acelga, caja_t_acelga, caja_q_papa, caja_p_papa, caja_t_papa, caja_q_cala, caja_p_cala,
+         caja_t_zapa, caja_q_beren, caja_p_beren, caja_t_beren, caja_q_puerro, caja_p_puerro, caja_t_puerro,
+         caja_q_morron, caja_p_morron, caja_t_morron, caja_q_tomate, caja_p_tomate, caja_t_tomate, caja_q_verdeo,
+         caja_p_verdeo, caja_t_verdeo, caja_q_zana, caja_p_zana, caja_t_zana, caja_q_ajo, caja_p_ajo, caja_t_ajo,
+         caja_q_pechuga, caja_p_pechuga, caja_t_pechuga, caja_q_batata, caja_p_batata, caja_t_batata, caja_q_limon,
+         caja_p_limon, caja_t_limon, caja_q_oregano, caja_p_oregano, caja_t_oregano, caja_q_pimenton, caja_p_pimenton,
+         caja_t_pimenton, caja_q_pimienta, caja_p_pimienta, caja_t_pimienta, caja_q_provenzal, caja_p_provenzal,
+         caja_t_provenzal, caja_q_nuez, caja_p_nuez, caja_t_nuez, caja_q_laurel, caja_p_laurel, caja_t_laurel,
+         caja_q_tapas, caja_p_tapas, caja_t_tapas, caja_q_noquiz, caja_p_noquiz, caja_t_noquiz, caja_q_huevos,
+         caja_p_huevos, caja_t_huevos, caja_q_te, caja_p_te, caja_t_te, caja_q_azucar, caja_p_azucar, caja_t_azucar,
+         caja_q_yerba, caja_p_yerba, caja_t_yerba, caja_q_edulco, caja_p_edulco, caja_t_edulco, caja_q_capsula,
+         caja_p_capsula, caja_t_capsula, caja_q_molido, caja_p_molido, caja_t_molido, caja_q_cafe_kilo, caja_p_cafe_kilo,
+         caja_t_cafe_kilo, caja_q_vasos_cafe, caja_p_vasos_cafe, caja_t_vasos_cafe, caja_p_alquiler,
+         caja_obs_alquiler, caja_p_luz, caja_obs_luz, caja_p_agua_servicio, caja_obs_agua, caja_p_telefono,
+         caja_obs_telefono, caja_p_abl, caja_obs_abl, caja_p_diario, caja_obs_diario, caja_p_fumigador,
+         caja_obs_fumigador, caja_p_detergente, caja_obs_detergente, caja_p_monotributo, caja_obs_monotributo,
+         caja_p_gas, caja_obs_gas, caja_p_tarjeta, caja_obs_tarjeta, caja_p_iibb, caja_obs_iibb, caja_q_flox,
+         caja_p_flox, caja_t_flox, caja_q_carton, caja_p_carton, caja_t_carton, caja_q_sulfito, caja_p_sulfito,
+         caja_t_sulfito, caja_q_film, caja_p_film, caja_t_film, caja_q_serv_mesa, caja_p_serv_mesa, caja_t_serv_mesa,
+         caja_q_serv_cocina, caja_p_serv_mesa, caja_t_serv_mesa, caja_q_serv_cocina, caja_p_serv_cocina,
+         caja_t_serv_cocina, caja_q_cubiertos, caja_p_cubiertos, caja_t_cubiertos, caja_q_bolsas_residuos,
+         caja_p_bolsas_residuos, caja_t_bolsas_residuos, caja_q_bolsas_pedidos, caja_p_bolsas_pedidos,
+         caja_t_bolsas_pedidos, caja_q_remos, caja_p_remos, caja_t_remos, caja_q_higienico, caja_p_higienico,
+         caja_t_higienico, caja_q_platos, caja_p_platos, caja_t_platos, caja_q_band_ensa, caja_p_band_ensa,
+         caja_t_band_ensa, caja_q_band_pure, caja_p_band_pure, caja_t_band_pure, caja_q_band_tapa, caja_p_band_pure,
+         caja_t_band_pure, caja_q_band_tapa, caja_p_band_tapa, caja_t_band_tapa, caja_q_alum, caja_p_alum,
+         caja_t_alum, caja_q_detergente, caja_p_detergente, caja_t_detergente, caja_q_lavan, caja_p_lavan,
+         caja_t_lavan, caja_q_perfume, caja_p_perfume, caja_t_perfume, caja_q_esponja, caja_p_esponja, caja_t_esponja,
+         caja_q_jabon, caja_p_jabon, caja_t_jabon, caja_q_desengrasante, caja_t_desengrasante, caja_p_desengrasante,
+         caja_q_alcohol, caja_p_alcohol, caja_t_alcohol]
+
+
 ## BOTONES - MESSAGE BOX
 costos = ttk.Button(text='Totalizar costos',command=mult)
 costos.place(x=1025,y=675)
