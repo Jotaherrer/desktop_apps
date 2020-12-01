@@ -15,6 +15,9 @@ precios = {'empanadas': 60, 'tartas': 200,
 # Descarga de datos del excel de la aplicacion
 df_ventas = pd.read_excel('Ventas.xlsx', engine="openpyxl", header=0, index_col=0, parse_dates=True)
 df_costos = pd.read_excel('Costos.xlsx', engine="openpyxl", header=0, index_col=0, parse_dates=True)
+df_costos2 = pd.read_excel('Costos(1).xlsx', engine="openpyxl", header=0, index_col=0, parse_dates=True)
+df_costos2 = df_costos2[df_costos2.columns.values[:-1]]
+df_costos = pd.concat([df_costos2, df_costos], axis=0)
 
 # Extraccion de precios del diccionario de precios en formato de lista de tuplas para ser utilizado.
 lista_productos = []
@@ -253,22 +256,23 @@ for i in range(len(costos_agrupados)):
     if i < 9:
         costos_agrupados.Empleados.values[i] = 660
         costos_agrupados.Huevos.values[i] = 0
+        costos_agrupados['Fumig.'].values[i] = 0
     else:
         costos_agrupados.Empleados.values[i] = 875
         costos_agrupados.Huevos.values[i] = 0
+        costos_agrupados['Fumig.'].values[i] = 0
 
-costos_agrupados = costos_agrupados[costos_agrupados.columns.values[:-1]]
+costos_agrupados = costos_agrupados[costos_agrupados.columns.values[:-2]]
 costos_agrupados['Final'] = np.sum(costos_agrupados, axis=1)
 costos_final.set_index('Hora transacción', inplace=True)
 
 for i in range(len(costos_final)):
     costos_final.Huevos.values[i] = 0
-for i in range(len(costos_final)):
+    costos_final['Fumig.'].values[i] = 0
     costos_final.Empleados.values[i] = 0
 
-costos_final = costos_final[costos_final.columns.values[:-1]]
+costos_final = costos_final[costos_final.columns.values[:-2]]
 costos_final['Final'] = np.sum(costos_final, axis=1)
 
 # Pasaje a Excel de informacion
 envio_excel(ventas_final, ventas_agrupadas, costos_final , costos_agrupados)
-
