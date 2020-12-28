@@ -6,7 +6,7 @@ import ttkthemes as themes
 import tkinter as tk
 from tkinter import messagebox, ttk
 import os, time
-import xlwings as xw
+#import xlwings as xw
 from openpyxl import Workbook, load_workbook
 
 lista_venta = []
