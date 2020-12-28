@@ -4,8 +4,8 @@ import os, xlwings as xw
 import datetime as dt
 
 # Almacenamiento de precios
-precios = {'empanadas': 60, 'tartas': 200,
-           'platos': {'plato_sin_guar': 230, 'plato_completo': 280, 'tortilla': 220, 'ensalada': 250, 'ensa_chica': 150,
+precios = {'empanadas': 65, 'tartas': 250,
+           'platos': {'plato_sin_guar': 250, 'plato_completo': 300, 'tortilla': 250, 'ensalada': 250, 'ensa_chica': 150,
                       'porcion_papas': 160, 'omelette': 200},
            'cafeteria': {'cafe_chico': 80, 'jarrito': 90, 'cafe_leche': 120, 'lagrima': 90, 'te': 80,
                          'cafe_llevar': 90, 'alfa': 60,'medialuna': 30},
@@ -13,11 +13,20 @@ precios = {'empanadas': 60, 'tartas': 200,
            'bebida': {'gaseosa': 80,'agua': 75,'cerveza': 100}}
 
 # Descarga de datos del excel de la aplicacion
-df_ventas = pd.read_excel('Ventas.xlsx', engine="openpyxl", header=0, index_col=0, parse_dates=True)
+df_ventas = pd.read_excel('archivo_ventas_viejo.xlsx', engine="openpyxl", header=0, index_col=0, parse_dates=True)
+df_ventas_nuevo = pd.read_excel('Ventas.xlsx', engine="openpyxl", header=0, index_col=0, parse_dates=True)
 df_costos = pd.read_excel('Costos.xlsx', engine="openpyxl", header=0, index_col=0, parse_dates=True)
 df_costos2 = pd.read_excel('Costos(1).xlsx', engine="openpyxl", header=0, index_col=0, parse_dates=True)
 df_costos2 = df_costos2[df_costos2.columns.values[:-1]]
 df_costos = pd.concat([df_costos2, df_costos], axis=0)
+
+for col in df_costos:
+    df_costos[col] = df_costos[col].fillna(0)
+
+df_costos['Costos Totales'] = df_costos['Total'] + df_costos['Total Fijos y Variables']
+del df_costos['Total']
+del df_costos['Total Fijos y Variables']
+
 
 # Extraccion de precios del diccionario de precios en formato de lista de tuplas para ser utilizado.
 lista_productos = []
@@ -229,19 +238,25 @@ descuentos = df_ventas.loc[:, ['Descuentos', 'Tarjeta D.']]
 ventas_final = pd.merge(ventas_final, descuentos, left_index=True, right_index=True)
 ventas_final = ventas_final.iloc[1:]
 ventas_final['Total Nuevo'] = np.sum(ventas_final, axis=1)
+ventas_final = pd.concat([df_ventas, df_ventas_nuevo], axis=0)
 # Agrupar por fecha
 ventas_agrupadas = ventas_final.groupby(ventas_final.index).sum().reset_index()
+ventas_agrupadas.rename(columns={'Hora transacción': 'index'}, inplace=True)
 ventas_agrupadas = ventas_agrupadas.groupby(ventas_agrupadas['index'].dt.date).sum()
 
 # Calcular costos totales
 costos_final = df_costos.reset_index()
 dates = []
-for d in costos_final['Hora transacción'].values:
-    d_new = pd.to_datetime(d)
-    year = d_new.year
-    month = d_new.month
-    day = d_new.day
-    dates.append((int(year),int(month),int(day)))
+for v, d in enumerate(costos_final['Hora transacción'].values):
+    if np.isnat(d) == True:
+        position = v
+        pass
+    else:
+        d_new = pd.to_datetime(d)
+        year = d_new.year
+        month = d_new.month
+        day = d_new.day
+        dates.append((int(year),int(month),int(day)))
 
 n_dates = []
 for d in dates:
@@ -249,6 +264,7 @@ for d in dates:
     d_n = dt.datetime(year,month,day)
     n_dates.append(d_n)
 
+costos_final.drop(position, inplace=True)
 costos_agrupados = costos_final
 costos_agrupados['Hora transacción'] = n_dates
 costos_agrupados = costos_agrupados.groupby('Hora transacción').sum()
@@ -261,6 +277,7 @@ for i in range(len(costos_agrupados)):
         costos_agrupados.Empleados.values[i] = 875
         costos_agrupados.Huevos.values[i] = 0
         costos_agrupados['Fumig.'].values[i] = 0
+        costos_agrupados['Flox'].values[i] = 0
 
 costos_agrupados = costos_agrupados[costos_agrupados.columns.values[:-2]]
 costos_agrupados['Final'] = np.sum(costos_agrupados, axis=1)
